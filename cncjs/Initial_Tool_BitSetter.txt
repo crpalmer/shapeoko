@@ -8,6 +8,8 @@
 %global.state.PROBE_Y_LOCATION = -373.5  ; machine coordinates
 %global.state.PROBE_Z_LOCATION = -30     ; machine coordinates --> lower this (more negative) to start the probing closer to wasteboard
 
+%global.state.PROBE_TOOLCHANGE_X = -430
+
 %global.state.PROBE_DISTANCE = 80
 %global.state.PROBE_RAPID_FEEDRATE = 300 ; mm/min
 

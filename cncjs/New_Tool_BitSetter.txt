@@ -18,13 +18,14 @@ M5                          ; Stop spindle
 G90                         ; Absolute positioning
 
 G53 G0 Z[global.state.SAFE_HEIGHT]
-G53 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
+G53 X[global.state.PROBE_TOOLCHANGE_X] Y[global.state.PROBE_Y_LOCATION]
 %wait
 
 
 ; Pause for manual tool change & probing
 M0
 
+G53 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
 G53 Z[global.state.PROBE_Z_LOCATION]
 %probe_start_z = posz
 G91
