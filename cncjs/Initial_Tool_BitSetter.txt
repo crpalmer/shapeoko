@@ -32,6 +32,7 @@ G53 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
 %wait
 
 G53 Z[global.state.PROBE_Z_LOCATION]
+%probe_start_z = posz
 G91
 G38.2 Z-[global.state.PROBE_DISTANCE] F[global.state.PROBE_RAPID_FEEDRATE];fast probe(so it doesn't take forever)
 G0 z2
@@ -44,9 +45,10 @@ G4 P.25
 G38.4 z10 F5
 G4 P.25
 G90
-%global.state.TOOL_REFERENCE = posz	 ; establish a global tool reference work offset
 %wait
-(TOOL_REFERENCE = [global.state.TOOL_REFERENCE])
+
+%probe_end_z = posz
+%global.state.PROBE_ACTUAL_DISTANCE = probe_start_z - probe_end_z
 
 G91
 G0 Z5

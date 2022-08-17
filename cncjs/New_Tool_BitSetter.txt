@@ -26,6 +26,7 @@ G53 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
 M0
 
 G53 Z[global.state.PROBE_Z_LOCATION]
+%probe_start_z = posz
 G91
 G38.2 z-[global.state.PROBE_DISTANCE] F[global.state.PROBE_RAPID_FEEDRATE];fast probe (so it doesn't take forever)
 G0 z2
@@ -40,8 +41,14 @@ G4 P.25
 G90
 
 %wait
+
+%probe_end_z = posz
+%probe_actual_distance = probe_start_z - probe_end_z
+
 ; Update Z offset for new tool
-G10 L20 Z[global.state.TOOL_REFERENCE]
+G10 L20 Z[posz + (probe_actual_distance - global.state.PROBE_ACTUAL_DISTANCE)]
+%global.state.PROBE_ACTUAL_DISTANCE = probe_actual_distance
+
 %wait
 
 G91
