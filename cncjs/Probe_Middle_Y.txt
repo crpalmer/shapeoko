@@ -1,0 +1,34 @@
+; Middle probing for Y:
+;   * Probe and set zero on the top side of the object being probed
+;   * Jog to position the spindle to the bottom of the object being
+;     probed and close to the object
+;   * Run this macro which will touch the object and then set a new zero
+;
+; Note: If your probe has an offset (e.g. using the spindle itself with 6mm
+;       dowel, you don't want to include that in the original zero as it will
+;       simply cancel itself out with the second zeroing).
+
+; Wait until the planner queue is empty
+%wait
+
+; Save modal state
+%WCS = modal.wcs
+%PLANE = modal.plane
+%UNITS = modal.units
+%DISTANCE = modal.distance
+%FEEDRATE = modal.feedrate
+%SPINDLE = modal.spindle
+%COOLANT = modal.coolant
+
+G21                                      ; metric
+M5                                       ; Stop spindle
+G91	                                 ; Relative positioning
+
+G38.2 Y10 F22.5                          ; Touch the side
+G10 L20 Y[posy / 2]                      ; Previous 0 was right side, new zero is middle so pos is half
+G1 Y-1 F600                              ; Back off a little bit
+
+G90                                      ; Absolute positioning
+
+; Restore modal state
+[WCS] [PLANE] [UNITS] [DISTANCE] [FEEDRATE] [SPINDLE] [COOLANT]
