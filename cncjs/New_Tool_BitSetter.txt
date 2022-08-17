@@ -1,5 +1,3 @@
-; This macro allows you to use a fixed machine location for a tool change/probe. Ideal when you're workpiece surface has been carved away.
-
 ; Wait until the planner queue is empty
 %wait
 
@@ -53,5 +51,6 @@ G53 Z[global.state.SAFE_HEIGHT]
 %wait
 ; Go to work zero at a SAFE_HEIGHT for Z
 G0 X0 Y0
+
 ; Restore modal state
 [WCS] [PLANE] [UNITS] [DISTANCE] [FEEDRATE] [SPINDLE] [COOLANT]
