@@ -1,6 +1,6 @@
 ; Middle probing for Y:
-;   * Probe and set zero on the top side of the object being probed
-;   * Jog to position the spindle to the bottom of the object being
+;   * Probe and set zero on the bottom side of the object being probed
+;   * Jog to position the spindle to the top of the object being
 ;     probed and close to the object
 ;   * Run this macro which will touch the object and then set a new zero
 ;
@@ -24,9 +24,9 @@ G21                                      ; metric
 M5                                       ; Stop spindle
 G91	                                 ; Relative positioning
 
-G38.2 Y10 F22.5                          ; Touch the side
+G38.2 Y-10 F22.5                         ; Touch the side
 G10 L20 Y[posy / 2]                      ; Previous 0 was right side, new zero is middle so pos is half
-G1 Y-1 F600                              ; Back off a little bit
+G1 Y1 F600                               ; Back off a little bit
 
 G90                                      ; Absolute positioning
 
