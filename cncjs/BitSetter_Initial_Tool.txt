@@ -1,6 +1,10 @@
 ; Wait until the planner queue is empty
 %wait
 
+; Bolt this on here so it gets defined early
+
+%global.state.PROBE_DIAMETER = 6.35	 ; Default diameter of the tool probe
+
 ; Set user-defined variables
 
 %global.state.SAFE_HEIGHT = -5           ; clear everything height(negative number, distance below Z limit)
