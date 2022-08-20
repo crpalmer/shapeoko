@@ -1,0 +1,67 @@
+; Wait until the planner queue is empty
+%wait
+
+%PROBE_DISTANCE=100
+%PROBE_FEEDRATE_FAST=240
+%PROBE_FEEDRATE_SLOW=22.5
+%RESTORE_FEEDRATE=600
+
+%UNITS=modal.units
+%DISTANCE=modal.distance
+
+%x0 = posx
+%y0 = posy
+
+G91 ; Relative positioning
+G21 ;Use millimeters
+
+; ====================== X pass 1 ===============================
+
+; Probe toward right side of hole with a maximum probe distance,
+; zero at the point and then return to the starting point
+
+G38.2 X[PROBE_DISTANCE] F[PROBE_FEEDRATE_FAST]
+G38.4 X-5 F[PROBE_FEEDRATE_SLOW]
+G38.2 X10 F[PROBE_FEEDRATE_SLOW]
+%wait
+%return_x = x0 - posx
+G10 L20 X0
+G1 X[return_x] F[RESTORE_FEEDRATE]
+
+; Probe toward Left side of hole with a maximum probe distance,
+; zero in the middle based on where it touches and return to X=0
+
+G38.2 X[-PROBE_DISTANCE] F[PROBE_FEEDRATE_FAST]
+G38.4 X5 F[PROBE_FEEDRATE_SLOW]
+G38.2 X-10 F[PROBE_FEEDRATE_SLOW]
+%wait
+%return_x = -posx/2
+G10 L20 X[posx/2]
+G1 X[return_x] F[RESTORE_FEEDRATE]
+
+; ====================== Y pass 1 ===============================
+
+; Probe toward back side of hole with a maximum probe distance,
+; zero at the point and return to the starting point
+
+G38.2 Y[PROBE_DISTANCE] F[PROBE_FEEDRATE_FAST]
+G38.4 Y-5 F[PROBE_FEEDRATE_SLOW]
+G38.2 Y10 F[PROBE_FEEDRATE_SLOW]
+%wait
+%return_y = y0 - posy
+G10 L20 Y0
+G1 Y[return_y] F[RESTORE_FEEDRATE]
+
+; Probe toward front side of hole with a maximum probe distance,
+; zero in the middle when it touches and return to X,Y=0
+
+G38.2 Y[-PROBE_DISTANCE] F[PROBE_FEEDRATE_FAST]
+G38.4 Y5 F[PROBE_FEEDRATE_SLOW]
+G38.2 Y-10 F[PROBE_FEEDRATE_SLOW]
+%wait
+%return_y = -posy/2
+G10 L20 Y[posy/2]
+G1 Y[return_y] F[RESTORE_FEEDRATE]
+
+; restore unit and distance modal state
+[UNITS] [DISTANCE]
