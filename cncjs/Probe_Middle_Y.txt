@@ -21,7 +21,7 @@ M5                                       ; Stop spindle
 G91	                                 ; Relative positioning
 
 G38.2 Y-10 F22.5                         ; Touch the side
-%edgey = posy - global.state.PROBE_DIAMETER/2
+%edgey = posy + global.state.PROBE_DIAMETER/2
 G10 L20 Y[edgey / 2]                      ; Previous 0 was right side, new zero is middle so pos is half
 G1 Y1 F600                               ; Back off a little bit
 
