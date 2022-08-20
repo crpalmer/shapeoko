@@ -1,0 +1,31 @@
+Tool numbers are assigned by vendor:
+
+1-20:	2L
+  * 3 3mm single flute    (#9003)
+  * 4 1/4" single flute   (#9001)
+  * 8 1/8" single flute   (#9018)
+  * 19 5/64" single flute (#9056)
+  * 20 1/4" long wood bit (#9014?)
+21-40:	Amana
+  * 21 1/4" single flute
+41-60:	Carbide3D
+  * 44 1/4" square    (#201)
+  * 48 1/8" square    (#102)
+  * 49 1/2" 90 degree (#301)
+  * 56 1/16" square   (#112)
+  * 58 1/8" ballnose  (#101)
+61-80:	China
+  * 62 2mm flat      (#7002)
+  * 68 1/8" flat     (#7012)
+  * 72 2mm ballnose  (?)
+  * 75 1.5mm flat    (#7015)
+  * 78 0.8mm flat    (#7008)
+81-100: China threadmills / drills
+  * 83 M3 threadmill
+  * 84 M4 threadmill
+  * 85 M5 threadmill
+  * 93 2.5mm drill
+101-120:DrillMan
+  * 109 90 chamfer bit
+121-140:Whitesides
+  * 121 1" surfacing bit
