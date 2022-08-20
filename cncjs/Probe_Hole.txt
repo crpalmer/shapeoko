@@ -54,29 +54,5 @@ G38.2 Y[-PROBE_DISTANCE] F[PROBE_FEEDRATE]
 G10 L20 Y[posy/2]
 G1 Y[return_y] F[RESTORE_FEEDRATE]
 
-; ====================== X pass 2 ===============================
-
-; Probe toward right side of hole with a maximum probe distance,
-; zero at the point and return to the starting point.  We run this
-; a second time to ensure we probed in the middle of hole.  We don't
-; bother rerunning the Y because it was already run from approximately
-; the middle of the hole
-
-G38.2 X[PROBE_DISTANCE] F[PROBE_FEEDRATE]
-%wait
-%return_x = -posx
-G10 L20 X0
-G1 X[return_x] F[RESTORE_FEEDRATE]
-
-; Probe toward Left side of hole with a maximum probe distance,
-; zero in the middle when it touches and return to X=0
-
-G38.2 X[-PROBE_DISTANCE] F[PROBE_FEEDRATE]
-%wait
-G10 L20 X[posx/2]
-
-G90
-G1 X0 F[RESTORE_FEEDRATE]
-
 ; restore unit and distance modal state
 [UNITS] [DISTANCE]
