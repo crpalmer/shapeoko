@@ -1,5 +1,8 @@
 all: cncrc
 
+install: all
+	cp cncrc ~/cnc/
+
 MACROS = \
     BitSetter_Initial_Tool.txt \
     BitSetter_New_Tool.txt \
