@@ -12,6 +12,7 @@ MACROS = \
     Probe_Middle_Y_from_Top.txt  \
     Probe_Z_Parallels.txt \
     Probe_Z.txt \
+    Probe_Z_Sacrificial.txt \
     Probe_Hole_Fast.txt \
     Probe_Use_0.25in_Probe.txt \
     Probe_Use_Touch_Probe.txt \
