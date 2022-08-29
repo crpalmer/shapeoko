@@ -3,8 +3,10 @@ all: cncrc
 MACROS = \
     BitSetter_Initial_Tool.txt \
     BitSetter_New_Tool.txt \
+    Probe_Edge_Left.txt \
     Probe_Edge_Right.txt \
     Probe_Edge_Bottom.txt \
+    Probe_Edge_Top.txt \
     Probe_Hole.txt \
     Probe_Middle_X_from_Left.txt \
     Probe_Middle_Y_from_Top.txt  \
