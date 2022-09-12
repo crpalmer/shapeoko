@@ -21,7 +21,7 @@ M5                                       ; Stop spindle
 G91	                                 ; Relative positioning
 
 G38.2 X10 F22.5                          ; Touch the side
-G10 L20 X[-global.state.PROBE_DIAMETER]  ; Zero at the probe edge
+G10 L20 X[-global.state.PROBE_DIAMETER/2]  ; Zero at the probe edge
 G1 X-1 F600                              ; Back off a little bit
 
 G90                                      ; Absolute positioning
