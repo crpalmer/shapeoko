@@ -26,7 +26,12 @@ MACROS = \
 
 .DELETE_ON_ERROR:
 
+all: cncrc gsender-macros.json
+
 cncrc: $(MACROS) build-cncrc.sh
+	./build-cncrc.sh --cncrc $(MACROS) >$@
+
+gsender-macros.json: $(MACROS) build-cncrc.sh
 	./build-cncrc.sh $(MACROS) >$@
 
 clean:
