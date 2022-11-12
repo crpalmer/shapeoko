@@ -1,0 +1,1243 @@
+{
+ "workspace": {
+  "units": "mm",
+  "reverseWidgets": false,
+  "safeRetractHeight": 0,
+  "toolChangeOption": "Manual",
+  "toolChangeHooks": {
+   "preHook": "",
+   "postHook": ""
+  },
+  "container": {
+   "primary": {
+    "show": true,
+    "widgets": [
+     "location",
+     "axes",
+     "secondary"
+    ]
+   },
+   "secondary": {
+    "widgets": []
+   }
+  },
+  "probeProfile": {
+   "xyThickness": {
+    "mm": 10,
+    "in": 0.393
+   },
+   "zThickness": {
+    "mm": 15,
+    "in": 0.59
+   },
+   "plateWidth": {
+    "mm": 50,
+    "in": 1.968
+   },
+   "plateLength": {
+    "mm": 50,
+    "in": 1.968
+   },
+   "functions": {
+    "x": true,
+    "y": true,
+    "z": true
+   },
+   "touchplateType": "Standard Block"
+  },
+  "tools": [
+   {
+    "metricDiameter": 6.35,
+    "imperialDiameter": 0.25,
+    "type": "end mill"
+   },
+   {
+    "metricDiameter": 3.175,
+    "imperialDiameter": 0.125,
+    "type": "end mill"
+   },
+   {
+    "metricDiameter": 9.525,
+    "imperialDiameter": 0.375,
+    "type": "end mill"
+   },
+   {
+    "metricDiameter": 12.7,
+    "imperialDiameter": 0.5,
+    "type": "end mill"
+   },
+   {
+    "metricDiameter": 15.875,
+    "imperialDiameter": 0.625,
+    "type": "end mill"
+   }
+  ],
+  "recentFiles": [],
+  "gamepad": {
+   "deadZone": 0.5,
+   "precision": 3,
+   "profiles": []
+  },
+  "terminal": {
+   "inputHistory": [
+    "$n1",
+    "$",
+    "?",
+    "$n",
+    "g43.1",
+    "g43.1 z0",
+    "?",
+    "$$",
+    "$i",
+    "$io",
+    "$i",
+    "$#",
+    "$n1=g43.1 Z5",
+    "$#",
+    "$n",
+    "$#",
+    "g43.1z5",
+    "?",
+    "$x",
+    "G43.1z5",
+    "$#",
+    "g43.1z0",
+    "(x)"
+   ]
+  },
+  "tool": {
+   "metricDiameter": 0,
+   "imperialDiameter": 0,
+   "type": "end mill"
+  },
+  "machineProfile": {
+   "id": 10,
+   "company": "",
+   "name": "Shapeoko",
+   "type": "",
+   "mm": {
+    "depth": 440,
+    "height": 95,
+    "width": 845
+   },
+   "in": {
+    "depth": 17.32,
+    "height": 3.74,
+    "width": 33.27
+   },
+   "endstops": false,
+   "spindle": false,
+   "coolant": false,
+   "laser": false,
+   "limits": {
+    "xmin": 0,
+    "ymin": 0,
+    "zmin": 0,
+    "xmax": 845,
+    "ymax": 440,
+    "zmax": 95
+   }
+  }
+ },
+ "widgets": {
+  "axes": {
+   "minimized": false,
+   "axes": [
+    "x",
+    "y",
+    "z"
+   ],
+   "jog": {
+    "xyStep": 5,
+    "zStep": 2,
+    "feedrate": 3000,
+    "keypad": false,
+    "rapid": {
+     "mm": {
+      "xyStep": 20,
+      "zStep": 10,
+      "feedrate": 5000
+     },
+     "in": {
+      "xyStep": 1,
+      "zStep": 0.5,
+      "feedrate": 196.85
+     }
+    },
+    "normal": {
+     "mm": {
+      "xyStep": 5,
+      "zStep": 2,
+      "feedrate": 3000
+     },
+     "in": {
+      "xyStep": 0.2,
+      "zStep": 0.04,
+      "feedrate": 118.11
+     }
+    },
+    "precise": {
+     "mm": {
+      "xyStep": 0.5,
+      "zStep": 0.1,
+      "feedrate": 1000
+     },
+     "in": {
+      "xyStep": 0.02,
+      "zStep": 0.004,
+      "feedrate": 39.37
+     }
+    },
+    "imperial": {
+     "step": 16,
+     "distances": []
+    },
+    "metric": {
+     "step": 12,
+     "distances": []
+    }
+   },
+   "mdi": {
+    "disabled": false
+   },
+   "shuttle": {
+    "feedrateMin": 500,
+    "feedrateMax": 2000,
+    "hertz": 10,
+    "overshoot": 1
+   }
+  },
+  "connection": {
+   "minimized": false,
+   "controller": {
+    "type": ""
+   },
+   "port": "COM3",
+   "baudrate": 115200,
+   "connection": {
+    "type": "serial",
+    "serial": {
+     "rtscts": false
+    }
+   },
+   "autoReconnect": false
+  },
+  "console": {
+   "minimized": false
+  },
+  "job_status": {
+   "minimized": false,
+   "feedrateMin": 500,
+   "feedrateMax": 2000,
+   "spindleSpeedMin": 0,
+   "spindleSpeedMax": 1000,
+   "speed": 1000
+  },
+  "grbl": {
+   "minimized": false,
+   "panel": {
+    "queueReports": {
+     "expanded": true
+    },
+    "statusReports": {
+     "expanded": true
+    },
+    "modalGroups": {
+     "expanded": true
+    }
+   }
+  },
+  "location": {
+   "minimized": false,
+   "axes": [
+    "x",
+    "y",
+    "z"
+   ],
+   "jog": {
+    "keypad": true,
+    "imperial": {
+     "step": 16,
+     "distances": []
+    },
+    "metric": {
+     "step": 12,
+     "distances": []
+    },
+    "speeds": {
+     "xyStep": 5,
+     "zStep": 0.5,
+     "feedrate": 5000
+    }
+   },
+   "mdi": {
+    "disabled": false
+   },
+   "shuttle": {
+    "feedrateMin": 500,
+    "feedrateMax": 2000,
+    "hertz": 10,
+    "overshoot": 1
+   }
+  },
+  "macro": {
+   "minimized": false
+  },
+  "probe": {
+   "minimized": false,
+   "probeCommand": "G38.2",
+   "connectivityTest": true,
+   "useTLO": false,
+   "probeDepth": 10,
+   "probeFeedrate": {
+    "mm": 75,
+    "in": 2.95
+   },
+   "probeFastFeedrate": {
+    "mm": 150,
+    "in": 5.9
+   },
+   "retractionDistance": {
+    "mm": 4,
+    "in": 0.15
+   },
+   "touchPlateHeight": 10,
+   "probeType": "Auto"
+  },
+  "spindle": {
+   "minimized": false,
+   "mode": "spindle",
+   "speed": 1000,
+   "spindleMax": 30000,
+   "spindleMin": 10000,
+   "laser": {
+    "power": 100,
+    "duration": 1,
+    "xOffset": 0,
+    "yOffset": 0,
+    "minPower": 0,
+    "maxPower": 255
+   }
+  },
+  "surfacing": {
+   "defaultMetricState": {
+    "bitDiameter": 22,
+    "stepover": 40,
+    "feedrate": 1500,
+    "length": 0,
+    "width": 0,
+    "skimDepth": 1,
+    "maxDepth": 1,
+    "spindleRPM": 17000,
+    "type": "SPIRAL_MOVEMENT",
+    "startPosition": "START_POSITION_BACK_LEFT",
+    "spindle": "M3"
+   },
+   "defaultImperialState": {
+    "bitDiameter": 1,
+    "stepover": 40,
+    "feedrate": 1500,
+    "length": 0,
+    "width": 0,
+    "skimDepth": 0.04,
+    "maxDepth": 0.04,
+    "spindleRPM": 669,
+    "type": "SPIRAL_MOVEMENT",
+    "startPosition": "START_POSITION_BACK_LEFT",
+    "spindle": "M3"
+   }
+  },
+  "visualizer": {
+   "minimized": false,
+   "liteMode": true,
+   "disabled": false,
+   "disabledLite": true,
+   "minimizeRenders": false,
+   "projection": "orthographic",
+   "cameraMode": "pan",
+   "theme": "Dark",
+   "gcode": {
+    "displayName": true
+   },
+   "objects": {
+    "limits": {
+     "visible": true
+    },
+    "coordinateSystem": {
+     "visible": true
+    },
+    "gridLineNumbers": {
+     "visible": true
+    },
+    "cuttingTool": {
+     "visible": true,
+     "visibleLite": false
+    },
+    "cuttingToolAnimation": {
+     "visible": true,
+     "visibleLite": false
+    },
+    "cutPath": {
+     "visible": true,
+     "visibleLite": true
+    }
+   },
+   "showWarning": true,
+   "showLineWarnings": true
+  },
+  "secondary": {
+   "minimized": false
+  }
+ },
+ "commandKeys": [
+  {
+   "id": 0,
+   "title": "Load File",
+   "keys": "shift+l",
+   "cmd": "LOAD_FILE",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Carving"
+  },
+  {
+   "id": 1,
+   "title": "Unload File",
+   "keys": "shift+k",
+   "cmd": "UNLOAD_FILE",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Carving"
+  },
+  {
+   "id": 2,
+   "title": "Test Run",
+   "keys": "#",
+   "cmd": "TEST_RUN",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Carving"
+  },
+  {
+   "id": 3,
+   "title": "Start Job",
+   "keys": "~",
+   "cmd": "START_JOB",
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Carving"
+  },
+  {
+   "id": 4,
+   "title": "Pause Job",
+   "keys": "!",
+   "cmd": "PAUSE_JOB",
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Carving"
+  },
+  {
+   "id": 5,
+   "title": "Stop Job",
+   "keys": "@",
+   "cmd": "STOP_JOB",
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Carving"
+  },
+  {
+   "id": 6,
+   "title": "Feed +",
+   "keys": "",
+   "cmd": "FEEDRATE_OVERRIDE",
+   "payload": {
+    "amount": 1
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 7,
+   "title": "Feed ++",
+   "keys": "",
+   "cmd": "FEEDRATE_OVERRIDE",
+   "payload": {
+    "amount": 10
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 8,
+   "title": "Feed -",
+   "keys": "",
+   "cmd": "FEEDRATE_OVERRIDE",
+   "payload": {
+    "amount": -1
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 9,
+   "title": "Feed --",
+   "keys": "",
+   "cmd": "FEEDRATE_OVERRIDE",
+   "payload": {
+    "amount": -10
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 10,
+   "title": "Feed Reset",
+   "keys": "",
+   "cmd": "FEEDRATE_OVERRIDE",
+   "payload": {
+    "amount": 0
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 11,
+   "title": "Spindle/Laser +",
+   "keys": "",
+   "cmd": "SPINDLE_OVERRIDE",
+   "payload": {
+    "amount": 1
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 12,
+   "title": "Spindle/Laser ++",
+   "keys": "",
+   "cmd": "SPINDLE_OVERRIDE",
+   "payload": {
+    "amount": 10
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 13,
+   "title": "Spindle/Laser -",
+   "keys": "",
+   "cmd": "SPINDLE_OVERRIDE",
+   "payload": {
+    "amount": -1
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 14,
+   "title": "Spindle/Laser --",
+   "keys": "",
+   "cmd": "SPINDLE_OVERRIDE",
+   "payload": {
+    "amount": -10
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 15,
+   "title": "Spindle/Laser Reset",
+   "keys": "",
+   "cmd": "SPINDLE_OVERRIDE",
+   "payload": {
+    "amount": 0
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Overrides"
+  },
+  {
+   "id": 16,
+   "title": "3D / Isometric",
+   "keys": "",
+   "cmd": "VISUALIZER_VIEW",
+   "payload": {
+    "type": "isometirc"
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Visualizer"
+  },
+  {
+   "id": 17,
+   "title": "Top",
+   "keys": "",
+   "cmd": "VISUALIZER_VIEW",
+   "payload": {
+    "type": "top"
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Visualizer"
+  },
+  {
+   "id": 18,
+   "title": "Front",
+   "keys": "",
+   "cmd": "VISUALIZER_VIEW",
+   "payload": {
+    "type": "front"
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Visualizer"
+  },
+  {
+   "id": 19,
+   "title": "Right",
+   "keys": "",
+   "cmd": "VISUALIZER_VIEW",
+   "payload": {
+    "type": "right"
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Visualizer"
+  },
+  {
+   "id": 20,
+   "title": "Left",
+   "keys": "",
+   "cmd": "VISUALIZER_VIEW",
+   "payload": {
+    "type": "left"
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Visualizer"
+  },
+  {
+   "id": 21,
+   "title": "Reset View",
+   "keys": "shift+n",
+   "cmd": "VISUALIZER_VIEW",
+   "payload": {
+    "type": "default"
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Visualizer"
+  },
+  {
+   "id": 22,
+   "title": "Lightweight Mode",
+   "keys": "shift+m",
+   "cmd": "LIGHTWEIGHT_MODE",
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Visualizer"
+  },
+  {
+   "id": 23,
+   "title": "Zero X Axis",
+   "keys": "shift+w",
+   "cmd": "ZERO_AXIS",
+   "preventDefault": true,
+   "payload": {
+    "axis": "x"
+   },
+   "isActive": true,
+   "category": "Location"
+  },
+  {
+   "id": 24,
+   "title": "Zero Y Axis",
+   "keys": "shift+e",
+   "cmd": "ZERO_AXIS",
+   "preventDefault": true,
+   "payload": {
+    "axis": "y"
+   },
+   "isActive": true,
+   "category": "Location"
+  },
+  {
+   "id": 25,
+   "title": "Zero Z Axis",
+   "keys": "shift+r",
+   "cmd": "ZERO_AXIS",
+   "preventDefault": true,
+   "payload": {
+    "axis": "z"
+   },
+   "isActive": true,
+   "category": "Location"
+  },
+  {
+   "id": 26,
+   "title": "Zero All",
+   "keys": "shift+q",
+   "cmd": "ZERO_AXIS",
+   "payload": {
+    "axis": "all"
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Location"
+  },
+  {
+   "id": 27,
+   "title": "Go to X Zero",
+   "keys": "shift+s",
+   "cmd": "GO_TO_AXIS_ZERO",
+   "preventDefault": true,
+   "payload": {
+    "axisList": [
+     "x"
+    ]
+   },
+   "isActive": true,
+   "category": "Location"
+  },
+  {
+   "id": 28,
+   "title": "Go to Y Zero",
+   "keys": "shift+d",
+   "cmd": "GO_TO_AXIS_ZERO",
+   "preventDefault": true,
+   "payload": {
+    "axisList": [
+     "y"
+    ]
+   },
+   "isActive": true,
+   "category": "Location"
+  },
+  {
+   "id": 29,
+   "title": "Go to Z Zero",
+   "keys": "shift+f",
+   "cmd": "GO_TO_AXIS_ZERO",
+   "preventDefault": true,
+   "payload": {
+    "axisList": [
+     "z"
+    ]
+   },
+   "isActive": true,
+   "category": "Location"
+  },
+  {
+   "id": 30,
+   "title": "Go to XY Zero",
+   "keys": "shift+a",
+   "cmd": "GO_TO_AXIS_ZERO",
+   "payload": {
+    "axisList": [
+     "x",
+     "y"
+    ]
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Location"
+  },
+  {
+   "id": 31,
+   "title": "Homing",
+   "keys": "ctrl+alt+command+h",
+   "cmd": "CONTROLLER_COMMAND",
+   "payload": {
+    "command": "homing"
+   },
+   "preventDefault": true,
+   "isActive": true,
+   "category": "Location"
+  },
+  {
+   "id": 32,
+   "title": "Jog: X+",
+   "keys": "shift+right",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "x": 1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 33,
+   "title": "Jog: X-",
+   "keys": "shift+left",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "x": -1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 34,
+   "title": "Jog: Y+",
+   "keys": "shift+up",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "y": 1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 35,
+   "title": "Jog: Y-",
+   "keys": "shift+down",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "y": -1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 36,
+   "title": "Jog: Z+",
+   "keys": "shift+pageup",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "z": 1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 37,
+   "title": "Jog: Z-",
+   "keys": "shift+pagedown",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "z": -1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 38,
+   "title": "Jog: X+ Y-",
+   "keys": "",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "x": 1,
+     "y": -1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 39,
+   "title": "Jog: X- Y+",
+   "keys": "",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "x": -1,
+     "y": 1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 40,
+   "title": "Jog: X+ Y+",
+   "keys": "",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "x": 1,
+     "y": 1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 41,
+   "title": "Jog: X- Y-",
+   "keys": "",
+   "cmd": "JOG",
+   "payload": {
+    "axis": {
+     "x": -1,
+     "y": -1
+    }
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 42,
+   "title": "Stop Jog",
+   "keys": "",
+   "cmd": "STOP_JOG",
+   "payload": {
+    "force": true
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 43,
+   "title": "Increase Jog Speed",
+   "keys": "=",
+   "cmd": "JOG_SPEED",
+   "payload": {
+    "speed": "increase"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 44,
+   "title": "Decrease Jog Speed",
+   "keys": "-",
+   "cmd": "JOG_SPEED",
+   "payload": {
+    "speed": "decrease"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 45,
+   "title": "Select Rapid Jog Preset",
+   "keys": "shift+v",
+   "cmd": "SET_JOG_PRESET",
+   "payload": {
+    "key": "rapid"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 46,
+   "title": "Select Normal Jog Preset",
+   "keys": "shift+c",
+   "cmd": "SET_JOG_PRESET",
+   "payload": {
+    "key": "normal"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 47,
+   "title": "Select Precise Jog Preset",
+   "keys": "shift+x",
+   "cmd": "SET_JOG_PRESET",
+   "payload": {
+    "key": "precise"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 48,
+   "title": "Cycle Through Jog Presets",
+   "keys": "shift+z",
+   "cmd": "CYCLE_JOG_PRESETS",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Jogging"
+  },
+  {
+   "id": 49,
+   "title": "Confirm Probe",
+   "keys": "",
+   "cmd": "CONFIRM_PROBE",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Probing"
+  },
+  {
+   "id": 50,
+   "title": "Start Probing",
+   "keys": "",
+   "cmd": "START_PROBE",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Probing"
+  },
+  {
+   "id": 51,
+   "title": "Toggle Mode",
+   "keys": "",
+   "cmd": "TOGGLE_SPINDLE_LASER_MODE",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Spindle/Laser"
+  },
+  {
+   "id": 52,
+   "title": "CW / Laser On",
+   "keys": "",
+   "cmd": "CW_LASER_ON",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Spindle/Laser"
+  },
+  {
+   "id": 53,
+   "title": "CCW / Laser Test",
+   "keys": "",
+   "cmd": "CCW_LASER_TEST",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Spindle/Laser"
+  },
+  {
+   "id": 54,
+   "title": "Stop / Laser Off",
+   "keys": "",
+   "cmd": "STOP_LASER_OFF",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Spindle/Laser"
+  },
+  {
+   "id": 71,
+   "title": "Mist Coolant",
+   "keys": "",
+   "cmd": "MIST_COOLANT",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Coolant"
+  },
+  {
+   "id": 72,
+   "title": "Flood Coolant",
+   "keys": "",
+   "cmd": "FLOOD_COOLANT",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Coolant"
+  },
+  {
+   "id": 73,
+   "title": "Stop Coolant",
+   "keys": "",
+   "cmd": "STOP_COOLANT",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Coolant"
+  },
+  {
+   "id": 55,
+   "title": "Cut",
+   "keys": "ctrl+x",
+   "cmd": "CUT",
+   "preventDefault": true,
+   "isActive": true,
+   "category": "General"
+  },
+  {
+   "id": 56,
+   "title": "Copy",
+   "keys": "ctrl+c",
+   "cmd": "COPY",
+   "preventDefault": true,
+   "isActive": true,
+   "category": "General"
+  },
+  {
+   "id": 57,
+   "title": "Paste",
+   "keys": "ctrl+v",
+   "cmd": "PASTE",
+   "preventDefault": true,
+   "isActive": true,
+   "category": "General"
+  },
+  {
+   "id": 58,
+   "title": "Undo",
+   "keys": "ctrl+z",
+   "cmd": "UNDO",
+   "preventDefault": true,
+   "isActive": true,
+   "category": "General"
+  },
+  {
+   "id": 59,
+   "title": "Close Dialog",
+   "keys": "esc",
+   "cmd": "CLOSE_DIALOG",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "General"
+  },
+  {
+   "id": 60,
+   "title": "Toggle Tab Widgets",
+   "keys": "tab",
+   "cmd": "TOGGLE_TAB_WIDGETS",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "General"
+  },
+  {
+   "id": 61,
+   "title": "Unlock",
+   "keys": "$",
+   "cmd": "CONTROLLER_COMMAND",
+   "payload": {
+    "command": "unlock"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "General"
+  },
+  {
+   "id": 62,
+   "title": "Soft Reset",
+   "keys": "%",
+   "cmd": "CONTROLLER_COMMAND",
+   "payload": {
+    "command": "reset"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "General"
+  },
+  {
+   "id": 63,
+   "title": "Toggle Shortcuts",
+   "keys": "^",
+   "cmd": "TOGGLE_SHORTCUTS",
+   "preventDefault": false,
+   "isActive": true,
+   "category": "General"
+  },
+  {
+   "id": 64,
+   "title": "Connect",
+   "keys": "f1",
+   "cmd": "OPEN_TOOLBAR",
+   "payload": {
+    "shouldConnect": true
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Toolbar"
+  },
+  {
+   "id": 65,
+   "title": "Surfacing",
+   "keys": "f2",
+   "cmd": "OPEN_TOOLBAR",
+   "payload": {
+    "toolbar": "widgets/macro:MODAL_SURFACING"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Toolbar"
+  },
+  {
+   "id": 66,
+   "title": "Heightmap",
+   "keys": "f3",
+   "cmd": "OPEN_TOOLBAR",
+   "payload": {
+    "toolbar": null
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Toolbar"
+  },
+  {
+   "id": 67,
+   "title": "Calibrate",
+   "keys": "f4",
+   "cmd": "OPEN_TOOLBAR",
+   "payload": {
+    "toolbar": "widgets/macro:MODAL_CALIBRATE"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Toolbar"
+  },
+  {
+   "id": 68,
+   "title": "Firmware",
+   "keys": "f5",
+   "cmd": "OPEN_TOOLBAR",
+   "payload": {
+    "toolbar": "widgets/macro:MODAL_FIRMWARE"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Toolbar"
+  },
+  {
+   "id": 69,
+   "title": "Help",
+   "keys": "f6",
+   "cmd": "OPEN_TOOLBAR",
+   "payload": {
+    "toolbar": "widgets/macro:MODAL_HELP"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Toolbar"
+  },
+  {
+   "id": 70,
+   "title": "Settings",
+   "keys": "f7",
+   "cmd": "OPEN_TOOLBAR",
+   "payload": {
+    "toolbar": "widgets/macro:MODAL_PREFERENCES"
+   },
+   "preventDefault": false,
+   "isActive": true,
+   "category": "Toolbar"
+  }
+ ]
+}
