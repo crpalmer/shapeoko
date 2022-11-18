@@ -10,14 +10,14 @@
   FORKID {D897E9AA-349A-4011-AA01-06B6CCC181EB}
 */
 
-description = "Carbide 3D (Grbl)";
+description = "Carbide 3D for CNCjs (Grbl)";
 vendor = "Carbide 3D";
 vendorUrl = "http://www.carbide3d.com";
 legal = "Copyright (C) 2012-2022 by Autodesk, Inc.";
 certificationLevel = 2;
 minimumRevision = 45702;
 
-longDescription = "Generic milling post for Carbide 3D (Grbl).";
+longDescription = "CNCjs / gSender milling post for Carbide 3D (Grbl).";
 
 extension = "nc";
 setCodePage("ascii");
@@ -100,6 +100,14 @@ properties = {
     ],
     value: "G28",
     scope: "post"
+  },
+  manualSpindleControl: {
+    title      : "Manual Spindle Control",
+    description: "Add pause commands (M0) to allow you to perform manual spindle speed changes.  This includes a comment indicating the required changed which works well with CNCjs / gSender.",
+    group      : "formats",
+    type       : "boolean",
+    value      : false,
+    scope      : "post"
   }
 };
 
@@ -357,10 +365,16 @@ function onSection() {
       warning(localize("Tool number exceeds maximum value."));
     }
 
-    writeToolBlock("T" + toolFormat.format(tool.number), mFormat.format(6));
-    if (tool.comment) {
-      writeComment(tool.comment);
+    var pieces = [ "; tool #" + tool.number ];
+    if (tool.description != null && tool.description !== '') {
+      pieces.push(tool.description);
     }
+    if (tool.comment != null && tool.comment !== '') {
+      pieces.push(tool.comment);
+    }
+    var comment = pieces.join(' / ');
+
+    writeToolBlock("T" + toolFormat.format(tool.number), mFormat.format(6), comment);
     var showToolZMin = false;
     if (showToolZMin) {
       if (is3D()) {
@@ -391,9 +405,8 @@ function onSection() {
     if (spindleSpeed > 99999) {
       warning(localize("Spindle speed exceeds maximum value."));
     }
-    writeBlock(
-      sOutput.format(spindleSpeed), mFormat.format(tool.clockwise ? 3 : 4)
-    );
+    writeBlock(sOutput.format(spindleSpeed));
+    onCommand(COMMAND_START_SPINDLE);
   }
 
   // wcs
@@ -750,6 +763,10 @@ var mapCommand = {
   COMMAND_STOP_SPINDLE            : 5
 };
 
+function writeStopSpindlePause() {
+  writeBlock(mFormat.format(0), "; Turn off the spindle");
+}
+
 function onCommand(command) {
   switch (command) {
   case COMMAND_STOP:
@@ -772,7 +789,15 @@ function onCommand(command) {
 
   var stringId = getCommandStringId(command);
   var mcode = mapCommand[stringId];
+
   if (mcode != undefined) {
+    if (getProperty("manualSpindleControl")) {
+      if (mcode == 5) {
+        writeStopSpindlePause();
+      } else {
+        writeBlock(mFormat.format(0), "; Set spindle speed to " + spindleSpeed + " rpm: " + (tool.clockwise ? "" : "C") + "CW ");
+      }
+    }
     writeBlock(mFormat.format(mcode));
   } else {
     onUnsupportedCommand(command);
@@ -870,6 +895,10 @@ function onClose() {
   setCoolant(COOLANT_OFF);
 
   writeRetract(Z); // retract
+
+  if (getProperty("manualSpindleControl")) {
+    writeStopSpindlePause();
+  }
 
   writeRetract(X, Y);
 
