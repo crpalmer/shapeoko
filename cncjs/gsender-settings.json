@@ -3,13 +3,13 @@
   "units": "mm",
   "reverseWidgets": false,
   "safeRetractHeight": 0,
-  "toolChangeOption": "Manual",
+  "toolChangeOption": "Macro",
   "toolChangeHooks": {
    "preHook": "",
    "postHook": "",
    "toolChangeMacro": ""
   },
-  "toolChangeMacro": "",
+  "toolChangeMacro": "b4e2bf23-4d47-403e-8e6b-28907caf7543",
   "container": {
    "primary": {
     "show": true,
