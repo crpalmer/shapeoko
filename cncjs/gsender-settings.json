@@ -6,8 +6,10 @@
   "toolChangeOption": "Manual",
   "toolChangeHooks": {
    "preHook": "",
-   "postHook": ""
+   "postHook": "",
+   "toolChangeMacro": ""
   },
+  "toolChangeMacro": "",
   "container": {
    "primary": {
     "show": true,
@@ -19,6 +21,71 @@
    },
    "secondary": {
     "widgets": []
+   }
+  },
+  "machineProfile": {
+   "id": 10,
+   "company": "",
+   "name": "Shapeoko",
+   "type": "",
+   "version": "MK1",
+   "mm": {
+    "width": 845,
+    "depth": 440,
+    "height": 95
+   },
+   "in": {
+    "width": 33.27,
+    "depth": 17.32,
+    "height": 3.74
+   },
+   "endstops": false,
+   "spindle": false,
+   "coolant": false,
+   "laser": false,
+   "eepromSettings": {
+    "$0": "10",
+    "$1": "100",
+    "$2": "1",
+    "$3": "5",
+    "$4": "1",
+    "$5": "0",
+    "$6": "0",
+    "$10": "1",
+    "$11": "0.010",
+    "$12": "0.002",
+    "$13": "0",
+    "$20": "0",
+    "$21": "0",
+    "$22": "0",
+    "$23": "0",
+    "$24": "25.000",
+    "$25": "500.000",
+    "$26": "250",
+    "$27": "1.000",
+    "$30": "30000",
+    "$31": "0",
+    "$32": "0",
+    "$100": "200.000",
+    "$101": "200.000",
+    "$102": "200.000",
+    "$110": "4000.000",
+    "$111": "4000.000",
+    "$112": "3000.000",
+    "$120": "750.000",
+    "$121": "750.000",
+    "$122": "500.000",
+    "$130": "812.000",
+    "$131": "304.000",
+    "$132": "105.000"
+   },
+   "limits": {
+    "xmin": 0,
+    "ymin": 0,
+    "zmin": 0,
+    "xmax": 845,
+    "ymax": 440,
+    "zmax": 95
    }
   },
   "probeProfile": {
@@ -109,34 +176,6 @@
    "metricDiameter": 0,
    "imperialDiameter": 0,
    "type": "end mill"
-  },
-  "machineProfile": {
-   "id": 10,
-   "company": "",
-   "name": "Shapeoko",
-   "type": "",
-   "mm": {
-    "depth": 440,
-    "height": 95,
-    "width": 845
-   },
-   "in": {
-    "depth": 17.32,
-    "height": 3.74,
-    "width": 33.27
-   },
-   "endstops": false,
-   "spindle": false,
-   "coolant": false,
-   "laser": false,
-   "limits": {
-    "xmin": 0,
-    "ymin": 0,
-    "zmin": 0,
-    "xmax": 845,
-    "ymax": 440,
-    "zmax": 95
-   }
   }
  },
  "widgets": {
@@ -320,6 +359,18 @@
    }
   },
   "surfacing": {
+   "bitDiameter": 22,
+   "stepover": 40,
+   "feedrate": 2500,
+   "length": 0,
+   "width": 0,
+   "skimDepth": 1,
+   "maxDepth": 1,
+   "spindleRPM": 17000,
+   "type": "SPIRAL_MOVEMENT",
+   "startPosition": "START_POSITION_BACK_LEFT",
+   "spindle": "M3",
+   "cutDirectionFlipped": false,
    "defaultMetricState": {
     "bitDiameter": 22,
     "stepover": 40,
