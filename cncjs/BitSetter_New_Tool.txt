@@ -47,7 +47,16 @@ G90
 %probe_actual_distance = probe_start_z - probe_end_z
 
 ; Update Z offset for new tool
-G10 L20 Z[posz + (probe_actual_distance - global.state.PROBE_ACTUAL_DISTANCE)]
+; note: do this in individual steps otherwise it sometimes treats some variables as strings (wtf??)
+;     resulting in new_z=-31.0423.3225252
+
+%delta_z = probe_actual_distance*1.0 - global.state.PROBE_ACTUAL_DISTANCE*1.0
+%new_z = posz*1.0 + delta_z*1.0
+%new_z  =  Math.round(new_z * 1000) / 1000
+(old=[global.state.PROBE_ACTUAL_DISTANCE] new=[probe_actual_distance] new_z=[new_z])
+
+G10 L20 Z[new_z]
+
 %global.state.PROBE_ACTUAL_DISTANCE = probe_actual_distance
 
 %wait
