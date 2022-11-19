@@ -3,4 +3,3 @@ G38.2 X-10 F22.5
 G10 L20 P1 X[global.state.PROBE_DIAMETER/2]
 G0 X1
 G90
-
