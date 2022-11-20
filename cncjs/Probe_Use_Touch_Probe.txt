@@ -1,1 +1,2 @@
 %global.state.PROBE_DIAMETER=2
+G43.1 Z47
