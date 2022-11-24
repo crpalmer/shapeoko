@@ -7,7 +7,8 @@ import:
 	./extract-cncrc.sh < ~/cnc/cncrc
 
 MACROS = \
-    BitSetter_Set_TLO.txt \
+    BitSetter_Initial_Tool.txt \
+    BitSetter_New_Tool.txt \
     Probe_Edge_Left.txt \
     Probe_Edge_Right.txt \
     Probe_Edge_Bottom.txt \
