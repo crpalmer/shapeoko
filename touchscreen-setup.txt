@@ -1,0 +1,18 @@
+- Switch window manager to use X11 by editing 
+   /etc/gdm3/custom.conf
+  and uncommenting
+   WaylandEnable=false
+
+- Calibration tool
+   sudo apt install xinput-calibrator
+
+- Switch to evdev from libinput
+   sudo apt install xserver-xorg-input-evdev
+   sudo apt-get remove xserver-xorg-input-libinput
+
+- run xinput_calibrator and save the settings in
+     /usr/share/X11/xorg.conf.d/10-evdev.conf
+  in the section for the touchscreen
+
+- Open Settings >> Screen and disable Automatic Screen Lock
+  (this seemed to allow tap to wake up on the tablet).
