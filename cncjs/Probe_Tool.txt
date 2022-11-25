@@ -35,6 +35,7 @@ G53 G0 Z[global.state.SAFE_HEIGHT]
 G53 X[global.state.PROBE_TOOLCHANGE_X] Y[global.state.PROBE_Y_LOCATION]
 
 ; Pause for manual tool change & probing
+%wait
 M0 ; Please insert a tool
 
 G53 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
