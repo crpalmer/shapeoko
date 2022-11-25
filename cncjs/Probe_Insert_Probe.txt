@@ -1,5 +1,5 @@
-; We can only be using the tool for probing, assume 1/4"
-%global.state.PROBE_DIAMETER=6.35
+; Set the diameter of our 3d probe
+%global.state.PROBE_DIAMETER=2
 
 ; Set user-defined variables TODO: Move to a common location!
 
@@ -7,11 +7,15 @@
 %global.state.PROBE_X_LOCATION = -2.5    ; machine coordinates
 %global.state.PROBE_Y_LOCATION = -436.5  ; machine coordinates
 %global.state.PROBE_Z_LOCATION = -30     ; machine coordinates --> lower this (more negative) to start the probing closer to wasteboard
+%global.state.PROBE_PROBE_Z_LOCATION = -65
+%global.state.PROBE_PROBE_DELTA_X = -13  ; distance to offset the probe location to ensure we miss the button for our touch probe
+%global.state.PROBE_PROBE_DELTA_Z = 2.42    ; distance to move to get to button press position instead of case position
 
 %global.state.PROBE_TOOLCHANGE_X = -430
 
 %global.state.PROBE_DISTANCE = 80
 %global.state.PROBE_RAPID_FEEDRATE = 300 ; mm/min
+%global.state.PROBE_PROBE_RAPID_FEEDRATE = 150 ; mm/min
 
 ; Wait until the planner queue is empty
 %wait
@@ -36,25 +40,21 @@ G53 X[global.state.PROBE_TOOLCHANGE_X] Y[global.state.PROBE_Y_LOCATION]
 
 ; Pause for manual tool change & probing
 %wait
-M0 ; Please insert a tool
+M0 ; Please insert the touch probe
 
-G53 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
+G53 X[global.state.PROBE_X_LOCATION + global.state.PROBE_PROBE_DELTA_X] Y[global.state.PROBE_Y_LOCATION]
+
 G53 Z[global.state.PROBE_Z_LOCATION]
-
 %probe_start_z = posz
+G53 Z[global.state.PROBE_PROBE_Z_LOCATION]
 
 G91
 
-G38.2 z-[global.state.PROBE_DISTANCE] F[global.state.PROBE_RAPID_FEEDRATE];fast probe (so it doesn't take forever)
-G0 z2
-G38.2 z-5 F40               ; "dial-it-in" probes
-G4 P.25
-G38.4 z10 F20
-G4 P.25
-G38.2 z-2 F10
-G4 P.25
-G38.4 z10 F5
-G4 P.25
+G38.2 z-[global.state.PROBE_DISTANCE] F[global.state.PROBE_PROBE_RAPID_FEEDRATE];fast probe (so it doesn't take forever)
+G0 z1
+G38.2 z-2 F20
+
+G0 Z[global.state.PROBE_PROBE_DELTA_Z]   ; go to where the button push would have been
 
 G90
 %wait
