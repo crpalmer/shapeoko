@@ -8,6 +8,7 @@ import:
 
 MACROS = \
     gen/Probe_Tool.json \
+    gen/Probe_Insert_Probe.json \
     gen/Probe_Edge_Left.json \
     gen/Probe_Edge_Right.json \
     gen/Probe_Edge_Bottom.json \
