@@ -7,21 +7,21 @@ import:
 	./extract-cncrc.sh < ~/cnc/cncrc
 
 MACROS = \
-    BitSetter_Initial_Tool.txt \
-    BitSetter_New_Tool.txt \
-    Probe_Edge_Left.txt \
-    Probe_Edge_Right.txt \
-    Probe_Edge_Bottom.txt \
-    Probe_Edge_Top.txt \
-    Probe_Hole.txt \
-    Probe_Middle_X_from_Left.txt \
-    Probe_Middle_Y_from_Top.txt  \
-    Probe_Z_Parallels.txt \
-    Probe_Z.txt \
-    Probe_Z_Sacrificial.txt \
-    Probe_Hole_Fast.txt \
-    Probe_Use_0.25in_Probe.txt \
-    Probe_Use_Touch_Probe.txt \
+    gen/BitSetter_Initial_Tool.json \
+    gen/BitSetter_New_Tool.json \
+    gen/Probe_Edge_Left.json \
+    gen/Probe_Edge_Right.json \
+    gen/Probe_Edge_Bottom.json \
+    gen/Probe_Edge_Top.json \
+    gen/Probe_Hole.json \
+    gen/Probe_Middle_X_from_Left.json \
+    gen/Probe_Middle_Y_from_Top.json  \
+    gen/Probe_Z_Parallels.json \
+    gen/Probe_Z.json \
+    gen/Probe_Z_Sacrificial.json \
+    gen/Probe_Hole_Fast.json \
+    gen/Probe_Use_0.25in_Probe.json \
+    gen/Probe_Use_Touch_Probe.json \
 
 
 .DELETE_ON_ERROR:
@@ -34,5 +34,10 @@ cncrc: $(MACROS) build-cncrc.sh
 gsender-macros.json: $(MACROS) build-cncrc.sh
 	./build-cncrc.sh $(MACROS) >$@
 
+gen/%.json: %.txt
+	mkdir -p gen
+	echo "$< ...."
+	./build-json.sh $< > $@
+
 clean:
-	rm -f cncrc
+	rm -rf cncrc gsender-macros.json gen
