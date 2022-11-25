@@ -1,1 +1,0 @@
-%global.state.PROBE_DIAMETER=6.35

@@ -7,8 +7,7 @@ import:
 	./extract-cncrc.sh < ~/cnc/cncrc
 
 MACROS = \
-    gen/BitSetter_Initial_Tool.json \
-    gen/BitSetter_New_Tool.json \
+    gen/Probe_Tool.json \
     gen/Probe_Edge_Left.json \
     gen/Probe_Edge_Right.json \
     gen/Probe_Edge_Bottom.json \
@@ -20,8 +19,6 @@ MACROS = \
     gen/Probe_Z.json \
     gen/Probe_Z_Sacrificial.json \
     gen/Probe_Hole_Fast.json \
-    gen/Probe_Use_0.25in_Probe.json \
-    gen/Probe_Use_Touch_Probe.json \
 
 
 .DELETE_ON_ERROR:
