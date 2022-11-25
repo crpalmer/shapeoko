@@ -40,8 +40,11 @@ M0 ; Please insert a tool
 
 G53 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
 G53 Z[global.state.PROBE_Z_LOCATION]
+
 %probe_start_z = posz
+
 G91
+
 G38.2 z-[global.state.PROBE_DISTANCE] F[global.state.PROBE_RAPID_FEEDRATE];fast probe (so it doesn't take forever)
 G0 z2
 G38.2 z-5 F40               ; "dial-it-in" probes
@@ -52,8 +55,8 @@ G38.2 z-2 F10
 G4 P.25
 G38.4 z10 F5
 G4 P.25
-G90
 
+G90
 %wait
 
 %probe_end_z = posz
