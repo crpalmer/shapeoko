@@ -16,8 +16,7 @@
 
 %global.state.PROBE_TOOLCHANGE_X = -430
 
-%global.state.PROBE_DISTANCE = 80
-%global.state.PROBE_RAPID_FEEDRATE = 300 ; mm/min
+%global.state.BITSETTER_PROBE_DISTANCE = 80
 %global.state.PROBE_PROBE_RAPID_FEEDRATE = 150 ; mm/min
 
 ; Wait until the planner queue is empty
@@ -53,7 +52,7 @@ G53 Z[global.state.PROBE_PROBE_Z_LOCATION]
 
 G91
 
-G38.2 z-[global.state.PROBE_DISTANCE] F[global.state.PROBE_PROBE_RAPID_FEEDRATE];fast probe (so it doesn't take forever)
+G38.2 z-[global.state.BITSETTER_PROBE_DISTANCE] F[global.state.PROBE_PROBE_RAPID_FEEDRATE];fast probe (so it doesn't take forever)
 G0 z1
 G38.2 z-2 F20
 
