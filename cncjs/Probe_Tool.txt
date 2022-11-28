@@ -1,5 +1,8 @@
 ; We can only be using the tool for probing, assume 1/4"
 %global.state.PROBE_DIAMETER=6.35
+%global.state.PROBE_FEED_FAST=22.5
+%global.state.PROBE_FEED_SLOW=10
+%global.state.PROBE_DISTANCE=10
 
 ; Set user-defined variables TODO: Move to a common location!
 
