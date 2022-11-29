@@ -217,6 +217,11 @@ function onOpen() {
   sequenceNumber = getProperty("sequenceNumberStart");
   writeln("%");
 
+  for (let i = 1; i <= 10; i++) {
+    if (i == 5) writeln(";     gSender eats any M0 commands in the first 10 lines of the gcode!!");
+    else writeln(";" + i);
+  }
+
   if (programName) {
     writeComment(programName);
   }
