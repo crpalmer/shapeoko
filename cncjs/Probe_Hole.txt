@@ -1,5 +1,8 @@
 %RESTORE_FEEDRATE=600
 
+%x0 = posx
+%y0 = posy
+
 G91 ; Relative positioning
 
 ; ====================== X pass 1 ===============================
@@ -13,6 +16,7 @@ G38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 %wait
 %return_x = x0 - posx
 G10 L20 X0
+([return_x])
 G1 X[return_x] F[RESTORE_FEEDRATE]
 
 ; Probe toward Left side of hole with a maximum probe distance,
@@ -50,5 +54,4 @@ G38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G10 L20 Y[posy/2]
 G1 Y[return_y] F[RESTORE_FEEDRATE]
 
-; restore unit and distance modal state
-[UNITS] [DISTANCE]
+g90

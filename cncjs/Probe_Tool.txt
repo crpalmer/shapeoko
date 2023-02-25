@@ -11,7 +11,8 @@
 %global.state.PROBE_Y_LOCATION = -436.5  ; machine coordinates
 %global.state.PROBE_Z_LOCATION = -30     ; machine coordinates --> lower this (more negative) to start the probing closer to wasteboard
 
-%global.state.PROBE_TOOLCHANGE_X = -430
+%global.state.PROBE_TOOLCHANGE_X = -100
+%global.state.PROBE_TOOLCHANGE_Y = -440
 
 %global.state.BITSETTER_PROBE_DISTANCE = 80
 %global.state.BITSETTER_PROBE_FEEDRATE = 300 ; mm/min
@@ -35,7 +36,7 @@ M5                          ; Stop spindle
 G90                         ; Absolute positioning
 
 G53 G0 Z[global.state.SAFE_HEIGHT]
-G53 X[global.state.PROBE_TOOLCHANGE_X] Y[global.state.PROBE_Y_LOCATION]
+G53 X[global.state.PROBE_TOOLCHANGE_X] Y[global.state.PROBE_TOOLCHANGE_Y]
 
 ; Pause for manual tool change & probing
 %wait

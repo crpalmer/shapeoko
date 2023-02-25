@@ -14,7 +14,8 @@
 %global.state.PROBE_PROBE_DELTA_X = -13  ; distance to offset the probe location to ensure we miss the button for our touch probe
 %global.state.PROBE_PROBE_DELTA_Z = 2.42    ; distance to move to get to button press position instead of case position
 
-%global.state.PROBE_TOOLCHANGE_X = -430
+%global.state.PROBE_TOOLCHANGE_X = -100
+%global.state.PROBE_TOOLCHANGE_Y = -440
 
 %global.state.BITSETTER_PROBE_DISTANCE = 80
 %global.state.PROBE_PROBE_RAPID_FEEDRATE = 150 ; mm/min
@@ -38,7 +39,7 @@ M5                          ; Stop spindle
 G90                         ; Absolute positioning
 
 G53 G0 Z[global.state.SAFE_HEIGHT]
-G53 X[global.state.PROBE_TOOLCHANGE_X] Y[global.state.PROBE_Y_LOCATION]
+G53 X[global.state.PROBE_TOOLCHANGE_X] Y[global.state.PROBE_TOOLCHANGE_Y]
 
 ; Pause for manual tool change & probing
 %wait
