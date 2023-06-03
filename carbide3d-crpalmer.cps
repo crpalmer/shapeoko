@@ -10,14 +10,14 @@
   FORKID {D897E9AA-349A-4011-AA01-06B6CCC181EB}
 */
 
-description = "Carbide 3D for CNCjs (Grbl)";
+description = "Carbide 3D by crpalmer (Grbl)";
 vendor = "Carbide 3D";
 vendorUrl = "http://www.carbide3d.com";
 legal = "Copyright (C) 2012-2022 by Autodesk, Inc. Modified by crpalmer@gmail.com.";
 certificationLevel = 2;
 minimumRevision = 45702;
 
-longDescription = "CNCjs / gSender milling post for Carbide 3D (Grbl).";
+longDescription = "Milling post for Carbide 3D (Grbl) extended by crpalmer.";
 
 extension = "nc";
 setCodePage("ascii");
@@ -102,23 +102,26 @@ properties = {
     scope: "post"
   },
   manualSpindleControl: {
-    title      : "Manual Spindle Control",
+    title      : "Manual speed changes",
     description: "Add pause commands (M0) to allow you to perform manual spindle speed changes.  This includes a comment indicating the required changed which works well with CNCjs / gSender.",
-    group      : "formats",
+    group      : "spindle",
     type       : "boolean",
     value      : false,
     scope      : "post"
   },
   spindleControlDwellSeconds: {
-    title      : "Pause after spindle speed changes",
+    title      : "Speed change pause seconds",
     description: "Add a dwell command to pause for the specified number of seconds whenever the spindle speed changes.",
-    group      : "formats",
-    type       : "float",
+    group      : "spindle",
+    type       : "number",
     value      : 0,
     scope      : "post"
-  }
+  },
 };
 
+groupDefinitions = {
+  spindle: {title: "Spindle Control", description: "Spindle control options", collapsed:false, order:1},
+  };
 // wcs definiton
 wcsDefinitions = {
   useZeroOffset: false,
