@@ -1,5 +1,5 @@
-; Set the diameter of our 3d probe
-%global.state.PROBE_DIAMETER=2
+; Set the diameter of our 3d probe (this is effective diameter because trigger point is not at the mid point)
+%global.state.PROBE_DIAMETER=0.35
 %global.state.PROBE_FEED_FAST=150
 %global.state.PROBE_FEED_SLOW=10
 %global.state.PROBE_DISTANCE=100
