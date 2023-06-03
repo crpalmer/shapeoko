@@ -19,8 +19,6 @@ MACROS = \
     gen/Probe_Z_Parallels.json \
     gen/Probe_Z.json \
     gen/Probe_Z_Sacrificial.json \
-    gen/Probe_Hole_Fast.json \
-
 
 .DELETE_ON_ERROR:
 
