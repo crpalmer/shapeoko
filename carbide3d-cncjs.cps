@@ -13,7 +13,7 @@
 description = "Carbide 3D for CNCjs (Grbl)";
 vendor = "Carbide 3D";
 vendorUrl = "http://www.carbide3d.com";
-legal = "Copyright (C) 2012-2022 by Autodesk, Inc.";
+legal = "Copyright (C) 2012-2022 by Autodesk, Inc. Modified by crpalmer@gmail.com.";
 certificationLevel = 2;
 minimumRevision = 45702;
 
