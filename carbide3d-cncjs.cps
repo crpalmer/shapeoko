@@ -108,6 +108,14 @@ properties = {
     type       : "boolean",
     value      : false,
     scope      : "post"
+  },
+  spindleControlDwellSeconds: {
+    title      : "Pause after spindle speed changes",
+    description: "Add a dwell command to pause for the specified number of seconds whenever the spindle speed changes.",
+    group      : "formats",
+    type       : "float",
+    value      : 0,
+    scope      : "post"
   }
 };
 
@@ -804,6 +812,10 @@ function onCommand(command) {
       }
     }
     writeBlock(mFormat.format(mcode));
+    let dwellSeconds = getProperty("spindleControlDwellSeconds");
+    if (dwellSeconds > 0) {
+      onDwell(dwellSeconds);
+    }
   } else {
     onUnsupportedCommand(command);
   }
