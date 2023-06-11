@@ -7,18 +7,18 @@ import:
 	./extract-cncrc.sh < ~/cnc/cncrc
 
 MACROS = \
-    gen/Probe_Tool.json \
-    gen/Probe_Insert_Probe.json \
-    gen/Probe_Edge_Left.json \
-    gen/Probe_Edge_Right.json \
-    gen/Probe_Edge_Bottom.json \
-    gen/Probe_Edge_Top.json \
-    gen/Probe_Hole.json \
-    gen/Probe_Middle_X_from_Left.json \
-    gen/Probe_Middle_Y_from_Top.json  \
-    gen/Probe_Z_Parallels.json \
-    gen/Probe_Z.json \
-    gen/Probe_Z_Sacrificial.json \
+    gen/Prb_Tool.json \
+    gen/Prb_Insert_Probe.json \
+    gen/Prb_Left_Edge.json \
+    gen/Prb_Right_Edge.json \
+    gen/Prb_Bottom_Edge.json \
+    gen/Prb_Top_Edge.json \
+    gen/Prb_Hole.json \
+    gen/Prb_Mid_X_from_Left.json \
+    gen/Prb_Mid_Y_from_Top.json  \
+    gen/Prb_Z_Parallels.json \
+    gen/Prb_Z.json \
+    gen/Prb_Z_Sacrificial.json \
 
 .DELETE_ON_ERROR:
 
