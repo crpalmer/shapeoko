@@ -4,7 +4,7 @@ install: all
 	cp cncrc ~/cnc/
 
 import:
-	./extract-cncrc.sh < ~/cnc/cncrc
+	./extract-cncrc.sh < ~/.cncrc
 
 MACROS = \
     gen/Prb_Tool.json \
