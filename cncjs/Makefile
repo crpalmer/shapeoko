@@ -20,6 +20,7 @@ MACROS = \
     gen/Prb_Z.json \
     gen/Prb_Z_Tape.json \
     gen/Prb_Z_Sacrificial.json \
+    gen/Prb_Find_Z.json
 
 .DELETE_ON_ERROR:
 
