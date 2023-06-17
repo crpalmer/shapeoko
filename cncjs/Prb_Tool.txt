@@ -45,8 +45,6 @@ M0 ; Please insert a tool
 G53 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
 G53 Z[global.state.PROBE_Z_LOCATION]
 
-%probe_start_z = posz
-
 G91
 
 G38.2 z-[global.state.BITSETTER_PROBE_DISTANCE] F[global.state.BITSETTER_PROBE_FEEDRATE];fast probe (so it doesn't take forever)
@@ -62,9 +60,10 @@ G4 P.25
 
 G90
 %wait
+%wait
 
-%probe_end_z = posz
-%probe_actual_distance = probe_start_z - probe_end_z
+%probe_end_z = mposz
+%probe_actual_distance = global.state.PROBE_Z_LOCATION - probe_end_z
 %is_initial_tool = ! (global.state.PROBE_ACTUAL_DISTANCE > 0)
 
 ; Update Z offset for new tool
@@ -74,21 +73,19 @@ G90
 %delta_z = is_initial_tool ? 0 : probe_actual_distance*1.0 - global.state.PROBE_ACTUAL_DISTANCE*1.0
 %new_z = posz*1.0 + delta_z*1.0
 %new_z  =  Math.round(new_z * 1000) / 1000
+
 (old=[global.state.PROBE_ACTUAL_DISTANCE] new=[probe_actual_distance] new_z=[new_z])
-
-G10 L20 Z[new_z]
-
 %global.state.PROBE_ACTUAL_DISTANCE = probe_actual_distance
 
-%wait
+G10 L20 Z[new_z]
 
 G91
 G0 Z5
 G90
 G53 Z[global.state.SAFE_HEIGHT]
-%wait
 ; Go to work zero at a SAFE_HEIGHT for Z
 G0 X0 Y0
 
 ; Restore modal state
+%wait
 [PLANE] [UNITS] [DISTANCE] [FEEDRATE] [SPINDLE] [COOLANT]

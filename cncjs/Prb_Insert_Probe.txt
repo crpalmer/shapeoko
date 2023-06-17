@@ -12,7 +12,7 @@
 %global.state.PROBE_Z_LOCATION = -30     ; machine coordinates --> lower this (more negative) to start the probing closer to wasteboard
 %global.state.PROBE_PROBE_Z_LOCATION = -65
 %global.state.PROBE_PROBE_DELTA_X = -13  ; distance to offset the probe location to ensure we miss the button for our touch probe
-%global.state.PROBE_PROBE_DELTA_Z = 2.42    ; distance to move to get to button press position instead of case position
+%global.state.PROBE_PROBE_DELTA_Z = 2.4  ; distance to move to get to button press position instead of case position
 
 %global.state.PROBE_TOOLCHANGE_X = -100
 %global.state.PROBE_TOOLCHANGE_Y = -440
@@ -48,7 +48,6 @@ M0 ; Please insert the touch probe
 G53 X[global.state.PROBE_X_LOCATION + global.state.PROBE_PROBE_DELTA_X] Y[global.state.PROBE_Y_LOCATION]
 
 G53 Z[global.state.PROBE_Z_LOCATION]
-%probe_start_z = posz
 G53 Z[global.state.PROBE_PROBE_Z_LOCATION]
 
 G91
@@ -61,11 +60,13 @@ G0 Z[global.state.PROBE_PROBE_DELTA_Z]   ; go to where the button push would hav
 
 G90
 %wait
+%wait
 
-%probe_end_z = posz
-%probe_actual_distance = probe_start_z - probe_end_z
+%probe_end_z = mposz
+%probe_actual_distance = global.state.PROBE_Z_LOCATION - probe_end_z
 %is_initial_tool = ! (global.state.PROBE_ACTUAL_DISTANCE > 0)
 
+(start=[global.state.PROBE_Z_LOCATION] end=[probe_end_z] d=[probe_actual_distance])
 ; Update Z offset for new tool
 ; note: do this in individual steps otherwise it sometimes treats some variables as strings (wtf??)
 ;     resulting in new_z=-31.0423.3225252
@@ -73,13 +74,11 @@ G90
 %delta_z = is_initial_tool ? 0 : probe_actual_distance*1.0 - global.state.PROBE_ACTUAL_DISTANCE*1.0
 %new_z = posz*1.0 + delta_z*1.0
 %new_z  =  Math.round(new_z * 1000) / 1000
-(old=[global.state.PROBE_ACTUAL_DISTANCE] new=[probe_actual_distance] new_z=[new_z])
 
-G10 L20 Z[new_z]
-
+(old=[global.state.PROBE_ACTUAL_DISTANCE] new=[probe_actual_distance] old_z[posz] new_z=[new_z])
 %global.state.PROBE_ACTUAL_DISTANCE = probe_actual_distance
 
-%wait
+G10 L20 Z[new_z]
 
 G91
 G0 Z5
