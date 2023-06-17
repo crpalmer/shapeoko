@@ -7,9 +7,9 @@ do
     echo $name
     (
 	echo '{'
-	cat <<<$content
+	cat <<<$content | sed 's/,*$//'
 	echo '}'
-    ) | jq -r '.content' \
+    ) | tee /tmp/x | jq -r '.content' \
       | sed -e '/./,$!d' -e :a -e '/^\n*$/{$d;N;ba' -e '}' \
       > $name
 done
