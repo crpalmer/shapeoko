@@ -85,8 +85,8 @@ G0 Z5
 G90
 G53 Z[global.state.SAFE_HEIGHT]
 %wait
-; Go to work zero at a SAFE_HEIGHT for Z
-G0 X0 Y0
+; Go to a safe location, the probe isn't guaranteed to clear the stock so DON'T GO TO (0,0)!!
+G53 X[global.state.PROBE_TOOLCHANGE_X] Y[global.state.PROBE_TOOLCHANGE_Y]
 
 ; Restore modal state
 [PLANE] [UNITS] [DISTANCE] [FEEDRATE] [SPINDLE] [COOLANT]
