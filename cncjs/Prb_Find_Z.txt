@@ -2,4 +2,8 @@ G91
 G38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 Z[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
+%wait
+%wait
+(Z=[Math.round((posz + (params.PRB.z - mposz)) * 10000) / 10000])
+G1 Z1
 G90

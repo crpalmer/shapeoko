@@ -20,6 +20,10 @@ MACROS = \
     gen/Prb_Z.json \
     gen/Prb_Z_Tape.json \
     gen/Prb_Find_Z.json \
+    gen/Prb_Find_X_Left.json \
+    gen/Prb_Find_X_Right.json \
+    gen/Prb_Find_Y_Bottom.json \
+    gen/Prb_Find_Y_Top.json
 
 .DELETE_ON_ERROR:
 
