@@ -6,6 +6,7 @@
 %global.state.PROBE_FEED_FAST=150
 %global.state.PROBE_FEED_SLOW=10
 %global.state.PROBE_DISTANCE=100
+%global.state.SOFT_LIMITS=1
 
 ; Set user-defined variables for the probing of the probe
 
@@ -37,14 +38,15 @@ M0 ; Please insert the touch probe
 G53 G0 X[probe_x_location + probe_probe_delta_x] Y[probe_y_location]
 G53 Z[probe_probe_z_location]
 
-G91
+G4 P0.1
+$20=0
 
 G38.2 z-[probe_distance] F[global.state.PROBE_FEED_FAST]
 G38.4 z[probe_distance] F[global.state.PROBE_FEED_SLOW]
 G38.2 z-[probe_distance] F[global.state.PROBE_FEED_SLOW]
 
-%wait
-G90
+G4 P0.1
+$20=[global.state.SOFT_LIMITS]
 
 %probe_end_z = Number(params.PRB.z) + probe_probe_delta_z
 %is_initial_tool = ! (global.state.PROBE_END_Z < 0)
@@ -54,7 +56,11 @@ G90
 
 %global.state.PROBE_END_Z = probe_end_z
 
-G10 L20 Z[Math.round((posz - (is_initial_tool ? 0 : delta_z)) * 10000) / 10000]
+G10 P1 L20 Z[Math.round((posz - (is_initial_tool ? 0 : delta_z)) * 10000) / 10000]
 
-; G53 G0 Z[safe_height]
-; G53 X[probe_toolchange_x] Y[probe_toolchange_y]
+%wait
+
+$20=[global.state.SOFT_LIMITS]
+
+G53 G0 Z[safe_height]
+G53 G0 X[probe_toolchange_x] Y[probe_toolchange_y]

@@ -1,7 +1,10 @@
 G91
+G4 P0.1
+$20=0
 G38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 Z[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G10 L2 Z[params.PRB.z]
 G90
-G0 z10
+$20=[global.state.SOFT_LIMITS]
+G0 z1

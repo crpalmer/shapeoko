@@ -1,9 +1,12 @@
 G91
+G4 P0.1
+$20=0
 G38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 %wait
 %wait
+$20=[global.state.SOFT_LIMITS]
 (X=[Math.round((posx + (params.PRB.x - mposx) + global.state.PROBE_DIAMETER/2) * 10000) / 10000])
 G0 X-1
 G90

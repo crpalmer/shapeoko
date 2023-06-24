@@ -4,6 +4,8 @@
 %my0 = mposy
 
 G91 ; Relative positioning
+G4 P0.1
+$20=0
 
 ; ====================== X pass 1 ===============================
 
@@ -53,5 +55,7 @@ G38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 
 G53 G1 Y[y + mid_y] F[RESTORE_FEEDRATE]
 G10 L20 X0 Y0
+
+$20=[global.state.SOFT_LIMITS]
 
 G90
