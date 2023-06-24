@@ -17,75 +17,41 @@
 %global.state.BITSETTER_PROBE_DISTANCE = 80
 %global.state.BITSETTER_PROBE_FEEDRATE = 300 ; mm/min
 
-; Wait until the planner queue is empty
-%wait
-
-; Keep a backup of current work position
-%X0=posx, Y0=posy, Z0=posz
-
-; Save modal state
-%PLANE = modal.plane
-%UNITS = modal.units
-%DISTANCE = modal.distance
-%FEEDRATE = modal.feedrate
-%SPINDLE = modal.spindle
-%COOLANT = modal.coolant
-
 G21                         ; metric
 M5                          ; Stop spindle
+
 G90                         ; Absolute positioning
 
 G53 G0 Z[global.state.SAFE_HEIGHT]
 G53 X[global.state.PROBE_TOOLCHANGE_X] Y[global.state.PROBE_TOOLCHANGE_Y]
 
 ; Pause for manual tool change & probing
-%wait
-M0 ; Please insert a tool
+G4 P0
+M0 ; Please insert the touch probe
 
-G53 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
+G53 G0 X[global.state.PROBE_X_LOCATION] Y[global.state.PROBE_Y_LOCATION]
 G53 Z[global.state.PROBE_Z_LOCATION]
 
 G91
 
-G38.2 z-[global.state.BITSETTER_PROBE_DISTANCE] F[global.state.BITSETTER_PROBE_FEEDRATE];fast probe (so it doesn't take forever)
-G0 z2
-G38.2 z-5 F40               ; "dial-it-in" probes
-G4 P.25
-G38.4 z10 F20
-G4 P.25
-G38.2 z-2 F10
-G4 P.25
-G38.4 z10 F5
-G4 P.25
+G38.2 z-[global.state.BITSETTER_PROBE_DISTANCE] F[global.state.BITSETTER_PROBE_FEEDRATE]
+G38.4 z[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
+G38.2 z-[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 
-G90
 %wait
-%wait
-
-%probe_end_z = mposz
-%probe_actual_distance = global.state.PROBE_Z_LOCATION - probe_end_z
-%is_initial_tool = ! (global.state.PROBE_ACTUAL_DISTANCE > 0)
-
-; Update Z offset for new tool
-; note: do this in individual steps otherwise it sometimes treats some variables as strings (wtf??)
-;     resulting in new_z=-31.0423.3225252
-
-%delta_z = is_initial_tool ? 0 : probe_actual_distance*1.0 - global.state.PROBE_ACTUAL_DISTANCE*1.0
-%new_z = posz*1.0 + delta_z*1.0
-%new_z  =  Math.round(new_z * 1000) / 1000
-
-(old=[global.state.PROBE_ACTUAL_DISTANCE] new=[probe_actual_distance] new_z=[new_z])
-%global.state.PROBE_ACTUAL_DISTANCE = probe_actual_distance
-
-G10 L20 Z[new_z]
-
-G91
-G0 Z5
 G90
-G53 Z[global.state.SAFE_HEIGHT]
+
+%probe_end_z = Number(params.PRB.z)
+%is_initial_tool = ! (global.state.PROBE_END_Z < 0)
+%delta_z = probe_end_z - global.state.PROBE_END_Z
+
+(old=[global.state.PROBE_END_Z] new=[probe_end_z] delta_z=[delta_z])
+
+%global.state.PROBE_END_Z = probe_end_z
+
+G10 L20 Z[Math.round((posz - (is_initial_tool ? 0 : delta_z)) * 10000) / 10000]
+
 ; Go to work zero at a SAFE_HEIGHT for Z
+G0
+G53 Z[global.state.SAFE_HEIGHT]
 G0 X0 Y0
-
-; Restore modal state
-%wait
-[PLANE] [UNITS] [DISTANCE] [FEEDRATE] [SPINDLE] [COOLANT]

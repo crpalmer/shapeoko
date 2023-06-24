@@ -1,7 +1,7 @@
 %RESTORE_FEEDRATE=600
 
-%x0 = posx
-%y0 = posy
+%mx0 = mposx
+%my0 = mposy
 
 G91 ; Relative positioning
 
@@ -13,11 +13,10 @@ G91 ; Relative positioning
 G38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
-%wait
-%return_x = x0 - posx
-G10 L20 X0
-([return_x])
-G1 X[return_x] F[RESTORE_FEEDRATE]
+%x_right = Number(params.PRB.x)
+G53 G1 X[mx0] F[RESTORE_FEEDRATE]
+
+G4 P1
 
 ; Probe toward Left side of hole with a maximum probe distance,
 ; zero in the middle based on where it touches and return to X=0
@@ -25,10 +24,11 @@ G1 X[return_x] F[RESTORE_FEEDRATE]
 G38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
-%wait
-%return_x = -posx/2
-G10 L20 X[posx/2]
-G1 X[return_x] F[RESTORE_FEEDRATE]
+%x = Number(params.PRB.x)
+%mid_x = (x_right - x)/2
+(x_left=[x] middle=[x + mid_x] x_right=[x_right])
+
+G53 G1 X[x + mid_x] F[RESTORE_FEEDRATE]
 
 ; ====================== Y pass 1 ===============================
 
@@ -38,10 +38,8 @@ G1 X[return_x] F[RESTORE_FEEDRATE]
 G38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
-%wait
-%return_y = y0 - posy
-G10 L20 Y0
-G1 Y[return_y] F[RESTORE_FEEDRATE]
+%y_top = Number(params.PRB.y)
+G53 G1 Y[my0] F[RESTORE_FEEDRATE]
 
 ; Probe toward front side of hole with a maximum probe distance,
 ; zero in the middle when it touches and return to X,Y=0
@@ -49,9 +47,11 @@ G1 Y[return_y] F[RESTORE_FEEDRATE]
 G38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
-%wait
-%return_y = -posy/2
-G10 L20 Y[posy/2]
-G1 Y[return_y] F[RESTORE_FEEDRATE]
+%y = Number(params.PRB.y)
+%mid_y = (y_top - y)/2
+(y_bottom=[y] middle=[y + mid_y] y_top=[y_top])
 
-g90
+G53 G1 Y[y + mid_y] F[RESTORE_FEEDRATE]
+G10 L20 X0 Y0
+
+G90
