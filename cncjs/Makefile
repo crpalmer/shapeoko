@@ -1,7 +1,7 @@
 all: cncrc
 
 install: all
-	cp cncrc ~/cnc/
+	cp cncrc ~/.cncrc
 
 import:
 	./extract-cncrc.sh < ~/.cncrc
