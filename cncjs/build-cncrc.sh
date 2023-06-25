@@ -34,5 +34,18 @@ done
 echo "]"
 
 if [ "$cncrc" == 1 ]; then
-    echo "}"
+  cat << EOF
+,
+    "events": [
+        {
+            "enabled": true,
+            "event": "controller:ready",
+            "trigger": "gcode",
+EOF
+  echo "            \"commands\": `jq -Rsa < ControllerReady.txt`"
+  cat << EOF
+        }
+    ]
+}
+EOF
 fi

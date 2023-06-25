@@ -4,7 +4,7 @@ install: all
 	cp cncrc ~/.cncrc
 
 import:
-	./extract-cncrc.sh < ~/.cncrc
+	./extract-cncrc.sh ~/.cncrc
 
 MACROS = \
     gen/Prb_Tool.json \
@@ -26,15 +26,21 @@ MACROS = \
     gen/Prb_Find_Y_Top.json \
     gen/dump_global_state.json
 
+EVENTS = \
+    ControllerReady.txt
+
+GSENDER_EVENTS = \
+    gen/ControllerReady.json
+
 .DELETE_ON_ERROR:
 
 all: cncrc gsender-macros.json
 
-cncrc: $(MACROS) build-cncrc.sh
+cncrc: $(MACROS) $(EVENTS) build-cncrc.sh
 	./build-cncrc.sh --cncrc $(MACROS) >$@
 
-gsender-macros.json: $(MACROS) build-cncrc.sh
-	./build-cncrc.sh $(MACROS) >$@
+gsender-macros.json: $(MACROS) $(GSENDER_EVENTS) build-cncrc.sh
+	./build-cncrc.sh $(MACROS) $(GSENDER_EVENTS) >$@
 
 gen/%.json: %.txt
 	mkdir -p gen

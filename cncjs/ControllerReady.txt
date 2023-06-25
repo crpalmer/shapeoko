@@ -1,0 +1,1 @@
+%global.state.test = 34
