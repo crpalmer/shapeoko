@@ -18,8 +18,7 @@
 %probe_toolchange_x = -100
 %probe_toolchange_y = -440
 
-%maximum_z_travel = 95    ; Shapeoko 4 Pro
-%bitsetter_probe_distance =  maximum_z_travel - Math.abs(probe_z_location)
+%bitsetter_probe_distance =  40
 %bitsetter_probe_feedrate = 300 ; mm/min
 
 G21                         ; metric
@@ -41,8 +40,8 @@ G4 P0.1
 $20=0
 
 G38.2 z-[bitsetter_probe_distance] F[bitsetter_probe_feedrate]
-G38.4 z[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
-G38.2 z-[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
+G38.4 z[bitsetter_probe_distance] F[global.state.PROBE_FEED_SLOW]
+G38.2 z-[bitsetter_probe_distance] F[global.state.PROBE_FEED_SLOW]
 
 G4 P0
 $20=[global.state.SOFT_LIMITS]

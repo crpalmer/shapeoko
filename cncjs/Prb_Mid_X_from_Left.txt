@@ -13,7 +13,9 @@ G38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 %wait
 $20=[global.state.SOFT_LIMITS]
 %mx0 = mposx - posx
-%edgex = mx0 - params.PRB.x - global.state.PROBE_DIAMETER/2
-G10 L20 X[-edgex / 2 + mposx - params.PRB.x]
+%edgex = mx0 - params.PRB.x + global.state.PROBE_DIAMETER/2
+%mid = -edgex / 2 + mposx - params.PRB.x
+(mx0=[mx0] edgex=[edgex] mid=[mid])
+G10 L20 X[mid]
 G1 X-1 F600
 G90

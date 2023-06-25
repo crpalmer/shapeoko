@@ -7,6 +7,7 @@ G38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 %wait
 %wait
 $20=[global.state.SOFT_LIMITS]
-(Y=[Math.round((posy - (params.PRB.y - mposy) - global.state.PROBE_DIAMETER/2) * 10000) / 10000])
-G1 Y1
+(mposy = [mposy] prby=[params.PRB.y])
+(Y=[Math.round((posy + (params.PRB.y - mposy) - global.state.PROBE_DIAMETER/2) * 10000) / 10000])
+G0 Y1
 G90

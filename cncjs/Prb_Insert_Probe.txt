@@ -2,7 +2,7 @@
 ; a probe is in the spindle. If you run Prb_Tool these values
 ; will be updated to reflect its configuration.
 
-%global.state.PROBE_DIAMETER=0.35
+%global.state.PROBE_DIAMETER=1.8
 %global.state.PROBE_FEED_FAST=150
 %global.state.PROBE_FEED_SLOW=10
 %global.state.PROBE_DISTANCE=100
@@ -15,7 +15,7 @@
 %probe_y_location = -436.5  ; machine coordinates
 %probe_probe_z_location = -65
 %probe_probe_delta_x = -13  ; distance to offset the probe location to ensure we miss the button for our touch probe
-%probe_probe_delta_z = 2.4  ; distance to move to get to button press position instead of case position
+%probe_probe_delta_z = 2.2 ; distance to move to get to button press position instead of case position
 
 %maximum_z_travel = 95    ; Shapeoko 4 Pro
 %probe_distance =  maximum_z_travel - Math.abs(probe_probe_z_location)

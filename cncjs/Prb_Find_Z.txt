@@ -8,5 +8,5 @@ G38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 %wait
 $20=[global.state.SOFT_LIMITS]
 (Z=[Math.round((posz + (params.PRB.z - mposz)) * 10000) / 10000])
-G1 Z1
+G0 Z1
 G90

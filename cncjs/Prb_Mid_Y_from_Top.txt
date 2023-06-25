@@ -14,6 +14,8 @@ G38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 $20=[global.state.SOFT_LIMITS]
 %my0 = mposy - posy
 %edgey = my0 - params.PRB.y - global.state.PROBE_DIAMETER/2
-G10 L20 Y[-edgey / 2 + mposy - params.PRB.y]
+%mid = -edgey / 2 + mposy - params.PRB.y
+(my0=[my0] edgey=[edgey] mid=[mid])
+G10 L20 Y[mid]
 G1 Y1 F600
 G90
