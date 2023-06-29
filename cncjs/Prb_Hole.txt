@@ -4,8 +4,6 @@
 %my0 = mposy
 
 G91 ; Relative positioning
-G4 P0.1
-$20=0
 
 ; ====================== X pass 1 ===============================
 
@@ -15,10 +13,12 @@ $20=0
 G38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
+
+%wait
+G4 P0  ; work around cncjs sending 1 command ahead
+
 %x_right = Number(params.PRB.x)
 G53 G1 X[mx0] F[RESTORE_FEEDRATE]
-
-G4 P1
 
 ; Probe toward Left side of hole with a maximum probe distance,
 ; zero in the middle based on where it touches and return to X=0
@@ -26,6 +26,10 @@ G4 P1
 G38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
+
+%wait
+G4 P0  ; work around cncjs sending 1 command ahead
+
 %x = Number(params.PRB.x)
 %mid_x = (x_right - x)/2
 (x_left=[x] middle=[x + mid_x] x_right=[x_right])
@@ -40,6 +44,10 @@ G53 G1 X[x + mid_x] F[RESTORE_FEEDRATE]
 G38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
+
+%wait
+G4 P0  ; work around cncjs sending 1 command ahead
+
 %y_top = Number(params.PRB.y)
 G53 G1 Y[my0] F[RESTORE_FEEDRATE]
 
@@ -49,13 +57,16 @@ G53 G1 Y[my0] F[RESTORE_FEEDRATE]
 G38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]
 G38.4 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
 G38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]
+
+%wait
+G4 P0  ; work around cncjs sending 1 command ahead
+
 %y = Number(params.PRB.y)
 %mid_y = (y_top - y)/2
 (y_bottom=[y] middle=[y + mid_y] y_top=[y_top])
 
 G53 G1 Y[y + mid_y] F[RESTORE_FEEDRATE]
-G10 L20 X0 Y0
-
-$20=[global.state.SOFT_LIMITS]
 
 G90
+
+G10 L20 X0 Y0
