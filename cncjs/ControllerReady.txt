@@ -1,1 +1,47 @@
-%global.state.test = 34
+% NOTE: ALL UNITS ARE METRIC.  IF YOU AREN'T USING METRIC YOU WILL NEED TO
+%       CHANGE EVERY ONE OF THESE PARAMETERS!
+
+% === Tool length probing parameters (bitsetter & touch probe) ===
+
+; Z height (machine coordinates) that is safe to use for rapid movements
+%global.state.SAFE_Z                = -1
+
+; Location (in macahine coordinates) to use when prompting the user to change a tool
+%global.state.TOOLCHANGE_X          = -100
+%global.state.TOOLCHANGE_Y          = -440
+
+%global.state.MAXIMUM_Z_TRAVEL      = 105
+
+% === Tool length specific probing parameters ===
+
+; Location (in machine coordinates) that we will rapid to before beginning to probe tool length
+%global.state.BITSETTER_X           = -2.5
+%global.state.BITSETTER_Y           = -436.5
+%global.state.BITSETTER_PROBE_Z     = -30
+
+% === Touch probe tool length specific probing parameters ===
+
+; Location (in machine coordinates) that we will rapid to before beginning to probe the touch probe tool length
+%global.state.PROBE_PROBE_X         = global.state.BITSETTER_X - 13
+%global.state.PROBE_PROBE_Y         = global.state.BITSETTER_Y
+%global.state.PROBE_PROBE_Z         = -50
+
+; Offet in z from where the probe is triggered to where the bitsetter should have been triggered by that tool length.
+%global.state.PROBE_PROBE_DELTA_Z = 2.2
+
+%bitsetter_probe_distance =  40
+%bitsetter_probe_feedrate = 300 ; mm/min
+
+% === Parameters used by the probing macros when a tool is in the spindle ===
+
+%global.state.TOOL_PROBE_DIAMETER   = 6.35
+%global.state.TOOL_PROBE_FEED_FAST  = 22.5
+%global.state.TOOL_PROBE_FEED_SLOW  = 10
+%global.state.TOOL_PROBE_DISTANCE   = 10
+
+% === Parameters used by the probing macros when the touch probe is in the spindle ===
+
+%global.state.PROBE_PROBE_DIAMETER  = 1.8
+%global.state.PROBE_PROBE_FEED_FAST = 150
+%global.state.PROBE_PROBE_FEED_SLOW = 10
+%global.state.PROBE_PROBE_DISTANCE  = 100
