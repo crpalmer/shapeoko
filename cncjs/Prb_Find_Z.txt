@@ -6,4 +6,4 @@ G0 Z1
 G90
 %wait
 G4 P0  ; work around cncjs sending 1 command ahead
-(Z=[Math.round((posz + (params.PRB.z - mposz)) * 10000) / 10000])
+(Z=[(posz + (params.PRB.z - mposz)).toFixed(4)])

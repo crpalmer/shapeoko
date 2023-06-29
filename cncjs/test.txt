@@ -44,5 +44,5 @@ $20=[global.state.SOFT_LIMITS]
 %global.state.PROBE_END_Z = probe_end_z
 
 G4 P0
-G10 L20 Z[Math.round((posz - (is_initial_tool ? 0 : delta_z)) * 10000) / 10000]
+G10 L20 Z[(posz - (is_initial_tool ? 0 : delta_z)).toFixed(4)]
 %Utils.sleep(500)

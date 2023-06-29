@@ -6,4 +6,4 @@ G0 X-1
 G90
 %wait
 G4 P0  ; work around cncjs sending 1 command ahead
-(X=[Math.round((posx + (params.PRB.x - mposx) + global.state.PROBE_DIAMETER/2) * 10000) / 10000])
+(X=[(posx + (params.PRB.x - mposx) + global.state.PROBE_DIAMETER/2).toFixed(4)])
