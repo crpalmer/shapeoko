@@ -23,7 +23,8 @@ MACROS = \
     gen/Prb_Find_X_Left.json \
     gen/Prb_Find_X_Right.json \
     gen/Prb_Find_Y_Bottom.json \
-    gen/Prb_Find_Y_Top.json
+    gen/Prb_Find_Y_Top.json \
+    gen/dump_global_state.json
 
 .DELETE_ON_ERROR:
 
