@@ -19,11 +19,11 @@ MACROS = \
     gen/Prb_Z_Parallels.json \
     gen/Prb_Z.json \
     gen/Prb_Z_Tape.json \
-    gen/Prb_Find_Z.json \
-    gen/Prb_Find_X_Left.json \
-    gen/Prb_Find_X_Right.json \
-    gen/Prb_Find_Y_Bottom.json \
-    gen/Prb_Find_Y_Top.json \
+    gen/Find_Z.json \
+    gen/Find_X_Left.json \
+    gen/Find_X_Right.json \
+    gen/Find_Y_Bottom.json \
+    gen/Find_Y_Top.json \
     gen/dump_global_state.json
 
 EVENTS = \
