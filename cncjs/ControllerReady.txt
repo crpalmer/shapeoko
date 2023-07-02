@@ -38,6 +38,8 @@
 %global.state.TOOL_PROBE_FEED_FAST  = 22.5
 %global.state.TOOL_PROBE_FEED_SLOW  = 10
 %global.state.TOOL_PROBE_DISTANCE   = 10
+%global.state.BITSETTER_FEED_FAST = 300
+%global.state.BITSETTER_FEED_SLOW = global.state.TOOL_PROBE_FEED_SLOW
 
 % === Parameters used by the probing macros when the touch probe is in the spindle ===
 
