@@ -1,0 +1,31 @@
+On a new machine:
+
+git clone https://github.com/creationix/nvm.git ~/.nvm
+cd ~/.nvm
+git checkout `git describe --abbrev=0 --tags`
+
+Add this to .bashrc.crpalmer if it's not there:
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+nvm install 14.21.1
+nvm install -g yarn
+
+and then you should be able to build it easily with:
+
+yarn install
+yarn build-prod
+
+and then run it with
+
+node bin/cncjs # -p 8080
+
+If you have problems with device not staying connected with dmesg errors:
+
+ch341-uart converter now disconnected from ttyUSB0
+
+then run
+
+sudo apt remove brltty
+
