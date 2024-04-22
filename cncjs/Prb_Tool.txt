@@ -18,7 +18,7 @@ M0 ; Please insert the requested tool
 G53 G0 X[global.state.BITSETTER_X] Y[global.state.BITSETTER_Y]
 G53 Z[global.state.BITSETTER_PROBE_Z]
 
-%probe_z = global.state.MAXIMUM_Z_TRAVEL - Math.abs(global.state.BITSETTER_PROBE_Z)
+%probe_z = global.state.MAXIMUM_Z_TRAVEL
 
 G38.2 z-[probe_z] F[global.state.BITSETTER_FEED_FAST]
 G38.4 z+[probe_z] F[global.state.BITSETTER_FEED_SLOW]
@@ -36,7 +36,7 @@ G4 P0  ; work around cncjs sending 1 command ahead
 %global.state.PROBE_END_Z = probe_end_z
 
 G53 G0 Z[global.state.SAFE_Z]
-G0 X0 Y0
+G53 G0 X[global.state.TOOLCHANGE_X] Y[global.state.TOOLCHANGE_Y]
 
 %wait
 G4 P0  ; work around cncjs sending 1 command ahead
