@@ -1,0 +1,112 @@
+{
+    "state": {
+        "checkForUpdates": true,
+        "controller": {
+            "exception": {
+                "ignoreErrors": false
+            }
+        }
+    },
+    "secret": "$2a$10$wzsxrunfn5euI2J6NqzxwO",
+    "macros": 
+[
+        {
+            "name": "Prb Tool",
+            "content": "; Probe parameters.  These are used by the probing macros when\n; a tool is in the spindle. If you run Prb_Insert_Probe these values\n; will be updated to reflect the probe's configuration\n\n%global.state.PROBE_DIAMETER  = global.state.TOOL_PROBE_DIAMETER\n%global.state.PROBE_FEED_FAST = global.state.TOOL_PROBE_FEED_FAST\n%global.state.PROBE_FEED_SLOW = global.state.TOOL_PROBE_FEED_SLOW\n%global.state.PROBE_DISTANCE  = global.state.TOOL_PROBE_DISTANCE\n\nM5\n\nG53 G0 Z[global.state.SAFE_Z]\nG53 X[global.state.TOOLCHANGE_X] Y[global.state.TOOLCHANGE_Y]\n\nG4 P0\nM0 ; Please insert the requested tool\n\nG53 G0 X[global.state.BITSETTER_X] Y[global.state.BITSETTER_Y]\nG53 Z[global.state.BITSETTER_PROBE_Z]\n\n%probe_z = global.state.MAXIMUM_Z_TRAVEL\n\nG38.2 z-[probe_z] F[global.state.BITSETTER_FEED_FAST]\nG38.4 z+[probe_z] F[global.state.BITSETTER_FEED_SLOW]\nG38.2 z-[probe_z] F[global.state.BITSETTER_FEED_SLOW]\n\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n\n%is_initial_tool = ! (global.state.PROBE_END_Z < 0)\n%probe_end_z     = Number(params.PRB.z)\n%delta_z         = probe_end_z - global.state.PROBE_END_Z\n\n(old=[global.state.PROBE_END_Z] new=[probe_end_z] delta_z=[delta_z])\n\n%global.state.PROBE_END_Z = probe_end_z\n\nG53 G0 Z[global.state.SAFE_Z]\nG53 G0 X[global.state.TOOLCHANGE_X] Y[global.state.TOOLCHANGE_Y]\n\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n\nG10 L20 Z[(posz - (is_initial_tool ? 0 : delta_z)).toFixed(4)]\n"
+        }
+,
+        {
+            "name": "Prb Insert Probe",
+            "content": "; Probe parameters.  These are used by the probing macros when\n; a probe is in the spindle. If you run Prb_Tool these values\n; will be updated to reflect its configuration.\n\n%global.state.PROBE_DIAMETER  = global.state.PROBE_PROBE_DIAMETER\n%global.state.PROBE_FEED_FAST = global.state.PROBE_PROBE_FEED_FAST\n%global.state.PROBE_FEED_SLOW = global.state.PROBE_PROBE_FEED_SLOW\n%global.state.PROBE_DISTANCE  = global.state.PROBE_PROBE_DISTANCE\n\nM5\n\nG53 G0 Z[global.state.SAFE_Z]\nG53 X[global.state.TOOLCHANGE_X] Y[global.state.TOOLCHANGE_Y]\n\n; Pause for manual tool change & probing\nG4 P0\nM0 ; Please insert the touch probe\n\nG53 G0 X[global.state.PROBE_PROBE_X] Y[global.state.PROBE_PROBE_Y]\nG53 Z[global.state.PROBE_PROBE_Z]\n\n%probe_z = global.state.MAXIMUM_Z_TRAVEL\n\nG38.2 z-[probe_z] F[global.state.PROBE_FEED_FAST]\nG38.4 z+[probe_z] F[global.state.PROBE_FEED_SLOW]\nG38.2 z-[probe_z] F[global.state.PROBE_FEED_SLOW]\n\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n\n%is_initial_tool = ! (global.state.PROBE_END_Z < 0)\n%probe_end_z     = Number(params.PRB.z) + global.state.PROBE_PROBE_DELTA_Z\n%delta_z         = probe_end_z - global.state.PROBE_END_Z\n\n(old=[global.state.PROBE_END_Z] new=[probe_end_z] delta_z=[delta_z])\n\n%global.state.PROBE_END_Z = probe_end_z\n\nG53 G0 Z[global.state.SAFE_Z]\nG53 G0 X[global.state.TOOLCHANGE_X] Y[global.state.TOOLCHANGE_Y]\n\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n\nG10 L20 Z[(posz - (is_initial_tool ? 0 : delta_z)).toFixed(4)]\n"
+        }
+,
+        {
+            "name": "Prb Left Edge",
+            "content": "G91\nG38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG1 X-1 F600\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\nG10 L20 X[mposx - Number(params.PRB.x) - global.state.PROBE_DIAMETER/2]\n"
+        }
+,
+        {
+            "name": "Prb Right Edge",
+            "content": "G91\nG38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 X1 F600\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\nG10 L20 X[mposx - Number(params.PRB.x) + global.state.PROBE_DIAMETER/2]\n"
+        }
+,
+        {
+            "name": "Prb Bottom Edge",
+            "content": "G91\nG38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 Y-1 F600\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\nG10 L20 Y[mposy - Number(params.PRB.y) - global.state.PROBE_DIAMETER/2]\n"
+        }
+,
+        {
+            "name": "Prb Top Edge",
+            "content": "G91\nG38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG1 Y1 F600\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\nG10 L20 Y[mposy - Number(params.PRB.y) + global.state.PROBE_DIAMETER/2]\n"
+        }
+,
+        {
+            "name": "Prb Hole",
+            "content": "%RESTORE_FEEDRATE=600\n\n%mx0 = mposx\n%my0 = mposy\n\nG91 ; Relative positioning\n\n; ====================== X pass 1 ===============================\n\n; Probe toward right side of hole with a maximum probe distance,\n; zero at the point and then return to the starting point\n\nG38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\n\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n\n%x_right = Number(params.PRB.x)\nG53 G1 X[mx0] F[RESTORE_FEEDRATE]\n\n; Probe toward Left side of hole with a maximum probe distance,\n; zero in the middle based on where it touches and return to X=0\n\nG38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\n\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n\n%x = Number(params.PRB.x)\n%mid_x = (x_right - x)/2\n(x_left=[x] middle=[x + mid_x] x_right=[x_right])\n\nG53 G1 X[x + mid_x] F[RESTORE_FEEDRATE]\n\n; ====================== Y pass 1 ===============================\n\n; Probe toward back side of hole with a maximum probe distance,\n; zero at the point and return to the starting point\n\nG38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\n\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n\n%y_top = Number(params.PRB.y)\nG53 G1 Y[my0] F[RESTORE_FEEDRATE]\n\n; Probe toward front side of hole with a maximum probe distance,\n; zero in the middle when it touches and return to X,Y=0\n\nG38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\n\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n\n%y = Number(params.PRB.y)\n%mid_y = (y_top - y)/2\n(y_bottom=[y] middle=[y + mid_y] y_top=[y_top])\n\nG53 G1 Y[y + mid_y] F[RESTORE_FEEDRATE]\n\nG90\n\nG10 L20 X0 Y0\n"
+        }
+,
+        {
+            "name": "Prb Mid X from Left",
+            "content": "; Middle probing for X:\n;   * Probe and set zero on the right side of the object being probed\n;   * Jog to position the spindle to the left side of the object being\n;     probed and close to the object\n;   * Run this macro which will touch the object and then set a new zero\n\nG91\nG38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG1 X-1 F600\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n%mx0 = mposx - posx\n%edgex = mx0 - params.PRB.x + global.state.PROBE_DIAMETER/2\n%mid = -edgex / 2 + mposx - params.PRB.x\n(mx0=[mx0] edgex=[edgex] mid=[mid])\nG10 L20 X[mid]\n"
+        }
+,
+        {
+            "name": "Prb Mid Y from Top",
+            "content": "; Middle probing for Y:\n;   * Probe and set zero on the bottom side of the object being probed\n;   * Jog to position the spindle to the top of the object being\n;     probed and close to the object\n;   * Run this macro which will touch the object and then set a new zero\n\nG91\nG38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG1 Y1 F600\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n%my0 = mposy - posy\n%edgey = my0 - params.PRB.y - global.state.PROBE_DIAMETER/2\n%mid = -edgey / 2 + mposy - params.PRB.y\n(my0=[my0] edgey=[edgey] mid=[mid])\nG10 L20 Y[mid]\n"
+        }
+,
+        {
+            "name": "Prb Z Parallels",
+            "content": "G91\nG38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Z[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 Z1\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\nG10 L20 Z[mposz - params.PRB.z*1.0 - 25.4]\n"
+        }
+,
+        {
+            "name": "Prb Z",
+            "content": "G91\nG38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Z[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 z1\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\nG10 L20 Z[mposz - params.PRB.z]\n"
+        }
+,
+        {
+            "name": "Prb Z Tape",
+            "content": "G91\nG38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Z[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 z1\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\nG10 L20 Z[mposz - params.PRB.z - (0.3+0.1)] ; leave a slight onion skin, it's supposed to be 0.3\n"
+        }
+,
+        {
+            "name": "Find Z",
+            "content": "G91\nG38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Z[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Z[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 Z1\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n(Z=[(posz + (params.PRB.z - mposz)).toFixed(4)])\n"
+        }
+,
+        {
+            "name": "Find X Left",
+            "content": "G91\nG38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 X-1\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n(X=[(posx + (params.PRB.x - mposx) + global.state.PROBE_DIAMETER/2).toFixed(4)])\n"
+        }
+,
+        {
+            "name": "Find X Right",
+            "content": "G91\nG38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 X[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 X[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 X1\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n(X=[(posx + (params.PRB.x - mposx) - global.state.PROBE_DIAMETER/2).toFixed(4)])\n"
+        }
+,
+        {
+            "name": "Find Y Bottom",
+            "content": "G91\nG38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 Y-1\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n(Y=[(posy + (params.PRB.y - mposy) + global.state.PROBE_DIAMETER/2).toFixed(4)])\n"
+        }
+,
+        {
+            "name": "Find Y Top",
+            "content": "G91\nG38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_FAST]\nG38.4 Y[global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG38.2 Y[-global.state.PROBE_DISTANCE] F[global.state.PROBE_FEED_SLOW]\nG0 Y1\nG90\n%wait\nG4 P0  ; work around cncjs sending 1 command ahead\n(Y=[(posy + (params.PRB.y - mposy) - global.state.PROBE_DIAMETER/2).toFixed(4)])\n"
+        }
+,
+        {
+            "name": "dump global state",
+            "content": "([JSON.stringify(global.state)])\n"
+        }
+]
+,
+    "events": [
+        {
+            "enabled": true,
+            "event": "controller:ready",
+            "trigger": "gcode",
+            "commands": "; NOTE: ALL UNITS ARE METRIC.  IF YOU AREN'T USING METRIC YOU WILL NEED TO\n;       CHANGE EVERY ONE OF THESE PARAMETERS!\n\n; === Tool length probing parameters (bitsetter & touch probe) ===\n\n; Z height (machine coordinates) that is safe to use for rapid movements\n%global.state.SAFE_Z                = -1\n\n; Location (in macahine coordinates) to use when prompting the user to change a tool\n%global.state.TOOLCHANGE_X          = -100\n%global.state.TOOLCHANGE_Y          = -440\n\n%global.state.MAXIMUM_Z_TRAVEL      = 105\n\n; === Tool length specific probing parameters ===\n\n; Location (in machine coordinates) that we will rapid to before beginning to probe tool length\n%global.state.BITSETTER_X           = -2.5\n%global.state.BITSETTER_Y           = -436.5\n%global.state.BITSETTER_PROBE_Z     = -30\n\n; === Touch probe tool length specific probing parameters ===\n\n; Location (in machine coordinates) that we will rapid to before beginning to probe the touch probe tool length\n%global.state.PROBE_PROBE_X         = global.state.BITSETTER_X - 13\n%global.state.PROBE_PROBE_Y         = global.state.BITSETTER_Y\n%global.state.PROBE_PROBE_Z         = -50\n\n; Offet in z from where the probe is triggered to where the bitsetter should have been triggered by that tool length.\n%global.state.PROBE_PROBE_DELTA_Z = 2.2\n\n%bitsetter_probe_distance =  40\n%bitsetter_probe_feedrate = 300 ; mm/min\n\n; === Parameters used by the probing macros when a tool is in the spindle ===\n\n%global.state.TOOL_PROBE_DIAMETER   = 6.35\n%global.state.TOOL_PROBE_FEED_FAST  = 22.5\n%global.state.TOOL_PROBE_FEED_SLOW  = 10\n%global.state.TOOL_PROBE_DISTANCE   = 10\n%global.state.BITSETTER_FEED_FAST = 300\n%global.state.BITSETTER_FEED_SLOW = global.state.TOOL_PROBE_FEED_SLOW\n\n; === Parameters used by the probing macros when the touch probe is in the spindle ===\n\n%global.state.PROBE_PROBE_DIAMETER  = 1.8\n%global.state.PROBE_PROBE_FEED_FAST = 150\n%global.state.PROBE_PROBE_FEED_SLOW = 10\n%global.state.PROBE_PROBE_DISTANCE  = 100\n"
+        }
+    ]
+}
